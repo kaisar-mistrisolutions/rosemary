@@ -1,35 +1,64 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('All Category') }}
-        </h2>
-    </x-slot>
-  
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="h-screen flex overflow-hidden bg-gray-100">
-    
-      @include('layouts.backend.partials.sidebar')
-    
-      <div class="flex flex-col w-0 flex-1 overflow-hidden">
-        <div class="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
-          <button class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-            <span class="sr-only">Open sidebar</span>
-            <!-- Heroicon name: outline/menu -->
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+
+<div class="h-screen flex overflow-hidden bg-gray-100">
+  <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+    <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-700">
+
+      <div class="absolute top-0 right-0 -mr-12 pt-2">
+        <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <span class="sr-only">Close sidebar</span>
+          <!-- Heroicon name: outline/x -->
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-shrink-0 flex items-center px-4">
+        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg" alt="Workflow">
+      </div>
+      
+    </div>
+
+    <div class="flex-shrink-0 w-14" aria-hidden="true">
+      <!-- Dummy element to force sidebar to shrink to fit close icon -->
+    </div>
+  </div>
+
+  @include('layouts.backend.partials.sidebar')
+
+  <div class="flex flex-col w-0 flex-1 overflow-hidden">
+    <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+      <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-2 -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+      @include('layouts.backend.partials.header')
+    </div>
+
         <main class="flex-1 relative z-0 overflow-y-fixed focus:outline-none">
           
 
           <!-- This example requires Tailwind CSS v2.0+ -->
-          <div class="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between pt-16 pl-12 pr-12 pb-8">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Category List
-              </h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 pt-12 pl-16">
+          Category List
+          </h3> 
+          <div class="pb-5 border-gray-200 sm:flex sm:items-center sm:justify-between pt-1 pl-12 pr-12 pb-8">
+            <div class="mt-3 sm:mt-0 sm:ml-4">
+              <form class="text-lg leading-6 font-medium text-gray-900">
+                <input id="search" name="search" type="search" autocomplete="search" required class="w-full px-5 py-2 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs border-gray-300 rounded-md" placeholder="search category">
+              </form>
+          </div>
+
               <div class="mt-3 sm:mt-0 sm:ml-4">
-              <a href="{{ route('add.categories') }}"><button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <a href="{{ route('app.categories.create') }}"><button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg> 
                   Create new category
               </button> </a>
               </div>
@@ -40,7 +69,7 @@
       <div class="flex flex-col">
       <div class="-my-2 overflow-x-fixed sm:-mx-6 lg:-mx-8 pl-12 pr-12">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div class="shadow overflow-hidden border-gray-200 sm:rounded-lg">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -53,8 +82,8 @@
                   <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th scope="col" class="relative px-6 py-3">
-                    <span class="sr-only">Edit</span>
+                  <th scope="col" class="px-2 py-3 text-middle text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -68,18 +97,18 @@
                     </div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="text-sm text-gray-900">Firt Category Name</div>
+                    <div class="text-sm text-gray-900">Clothing</div>
+                    <a href="{{ route('app.sub.categories.index')}}" class="text-sm leading-5 text-gray-500 hover:text-indigo-900">
+                    View sub-category </a>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                       Active
                     </span>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a href="#" class="text-red-600 hover:text-indigo-900">Delete</a>
+                  <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    <a href="#" class="text-indigo-600 hover:text-indigo-900 pr-1">Edit</a>
+                      <a href="#" class="text-red-600 hover:text-indigo-900 pl-1">Delete</a>
                     </td>
                 </tr>
               </tbody>

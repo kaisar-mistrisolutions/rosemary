@@ -9,16 +9,11 @@ class CategoryController extends Controller
 {
 
     public function index(){
-        return view('layouts.backend.addc');
-    }
-
-    
-    public function category_index(){
-        return view('layouts.backend.all_categories');
+        return view('layouts.backend.admin.category.all_categories');
     }
 
 
     public function create(){
-        return view('layouts.backend.add_categories');
+        return view('layouts.backend.admin.category.add_categories');
     }
 }
