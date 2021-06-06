@@ -12,24 +12,23 @@ use App\Models\SubCategory;
 
 class SubCategoryController extends Controller
 {
-    // Show all sub-categories
+    // Show all sub categories
     public function index($id){
         $category=Category::findOrFail($id);
         return view('layouts.backend.admin.sub-category.all_sub_categories', [   
-            'sub_categories' => $category->subcategories()->latest()->paginate(3),
+            'sub_categories' => $category->subcategories()->paginate(3),
             'category' => $category,
         ]);
     }
 
-    // Sub-category create form
+    // Sub category create form
     public function create($id){
-        $category=Category::findOrFail($id);
         return view('layouts.backend.admin.sub-category.add_sub_categories', [
-            'category' => $category
+            'category' => Category::findOrFail($id)
         ]);
     }
 
-    // Store sub-category
+    // Store sub category
     public function store(Request $request) {
         Validator::make($request->all(),[
             'name'=>'required|string'
@@ -45,8 +44,44 @@ class SubCategoryController extends Controller
         return redirect()->route('app.categories.index',[$category_id])->with('success','Sub Category Added');
     }
 
-    // Sub Category edit form
-    public function edit(Request $request){
-        return view('layouts.backend.admin.sub-category.update_sub_categories');
+    // Sub category edit form
+    public function edit(Category $category, SubCategory $sub_category){
+        return view('layouts.backend.admin.sub-category.update_sub_categories', [
+            'category' => $category,
+            'sub_category' => $sub_category
+        ]);
     }
+
+
+    // Update sub category
+    public function update(Request $request,  SubCategory $sub_category)
+    {
+        $request->validate([
+            'name'=>'required|string',
+        ]);
+
+        $category_id = $request->category_id;
+
+        $sub_category->update([
+            'name'=>$request->name,
+            'slug'=>Str::slug($request->name),
+            'category_id'=>$request->category_id
+        ]);
+
+        return redirect()->route('app.sub.categories.index', [$category_id])->with('success','Sub Category Updated Successfully');
+    }
+
+
+    // Delete Category
+    public function destroy(Request $request) {
+        $category = Category::where('id', $request->id)->first();
+        if(isset($category->id)){
+            if (Storage::disk('public')->exists($category->image)){
+                Storage::disk('public')->delete($category->image);
+            }
+        }
+        $category->delete();
+        return redirect()->route('app.categories.index')->with('success','Category Deleted');
+    }
+   
 }

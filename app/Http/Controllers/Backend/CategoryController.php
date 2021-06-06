@@ -18,7 +18,7 @@ class CategoryController extends Controller
     // Show all categories
     public function index(){
         return view('layouts.backend.admin.category.all_categories', [
-            'categories' => Category::latest()->paginate(2)
+            'categories' => Category::paginate(2)
         ]);
     }
 
@@ -34,6 +34,7 @@ class CategoryController extends Controller
         ]);
     }
    
+    // Store Category
     public function store(Request $request) {
         Validator::make($request->all(),[
             'name'=>'required|string',
@@ -53,6 +54,7 @@ class CategoryController extends Controller
     }
 
 
+    // Update Category
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -86,6 +88,8 @@ class CategoryController extends Controller
         return redirect()->route('app.categories.index')->with('success','Category Updated Successfully');
     }
 
+
+    // Delete Category
     public function destroy(Request $request) {
         $category = Category::where('id', $request->id)->first();
         if(isset($category->id)){

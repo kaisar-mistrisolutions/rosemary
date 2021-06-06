@@ -15,7 +15,7 @@ class BrandController extends Controller
 {
     public function index(){
         return view('layouts.backend.admin.brand.all_brands', [
-            'brands' => Brand::latest()->paginate(2)
+            'brands' => Brand::paginate(2)
         ]);
     }
 

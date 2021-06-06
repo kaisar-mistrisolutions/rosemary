@@ -102,9 +102,9 @@
             </div>
           </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('app.sub.categories.update', $sub_category->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
             <div class="shadow sm:rounded-md sm:overflow-hidden">
               <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div class="grid grid-cols-3 gap-6">
@@ -113,8 +113,8 @@
                       Sub Category Name
                     </label>
                     <div class="mt-1 flex rounded-md shadow-sm">
-                      <input type="text" name="name" id="sub_category" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="sub category name">
-                      <input type="hidden" name="category_id" value="#">
+                      <input type="text" name="name" id="sub_category"  value="{{ $sub_category->name}}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="sub category name">
+                      <input type="hidden" name="scategory_id" value="{{ $category->id}}">
                     </div>
                   </div>
                 </div>
