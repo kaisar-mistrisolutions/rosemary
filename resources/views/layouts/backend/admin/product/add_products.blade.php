@@ -108,46 +108,53 @@
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
             <div class="grid grid-cols-3 gap-6">
               <div class="col-span-3 sm:col-span-2">
-                <label for="company_website" class="block text-sm font-medium text-gray-700">
+                <label for="name" class="block text-sm font-medium text-gray-700">
                   Product Name
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="company_website" id="company_website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
+                  <input type="text" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
                 </div>
               </div>
             </div>
 
             <div>
-              <label for="about" class="block text-sm font-medium text-gray-700">
+              <label for="description" class="block text-sm font-medium text-gray-700">
                 Description
               </label>
               <div class="mt-1">
-                <textarea id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
+                <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
               </div>
               <p class="mt-2 text-sm text-gray-500">
                 Brief description for the product
               </p>
             </div>
 
-            <select id="country" name="country" autocomplete="country" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+            
+            <select id="category" name="category" autocomplete="category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                 <option value="none" selected="" disabled="" hidden="">
                   Select Category
                 </option>
-                <option>Cloth</option>
+                @foreach($categories as $category)
+                <option>{{ $category->name }}</option>
+                @endforeach
             </select>
-
-            <select id="sub-category" name="sub-category" autocomplete="sub-category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+            
+            <select id="sub-category" name="sub_category" autocomplete="sub-category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                 <option value="none" selected="" disabled="" hidden="">
-                  Select Sub-Category
+                  Select Sub Category
                 </option>
-                <option>Female</option>
+                @foreach($sub_categories as $sub_category)
+                <option>{{ $sub_category->name}}</option>
+                @endforeach
             </select>
 
             <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                 <option value="none" selected="" disabled="" hidden="">
                   Select Brand
                 </option>
-                <option>Aarong</option>
+                @foreach($brands as $brand)
+                <option>{{ $brand->name }}</option>
+                @endforeach
             </select>
 
             <div class="col-span-3 sm:col-span-2">
@@ -160,21 +167,21 @@
             </div>
 
             <div class="col-span-3 sm:col-span-2">
-                <label for="company_website" class="block text-sm font-medium text-gray-700">
+                <label for="per_unit_price" class="block text-sm font-medium text-gray-700">
                   Per Unit Price
-                  </label>
+                </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" min="1" step="any" name="ppp" id="ppp" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="number" min="1" step="any" name="per_unit_price" id="ppp" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
             </div>
 
-            <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+            <!-- <select id="discount" name="discount" autocomplete="discount" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                 <option value="none" selected="" disabled="" hidden="">
                   Discount
                 </option>
                 <option>Flat</option>
                 <option>Percentage</option>
-            </select>
+            </select> -->
 
 
             <div>
@@ -187,9 +194,9 @@
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                   <div class="flex text-sm text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <label for="thumbnail_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span>Upload a Thumbnail Image</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                      <input id="thumbnail_image" name="thumbnail_image" type="file" class="sr-only">
                     </label>
                     <p class="pl-1">or drag and drop</p>
                   </div>
@@ -201,7 +208,7 @@
             </div>
 
 
-            <div>
+            <!-- <div>
               <label class="block text-sm font-medium text-gray-700">
                 Multiple Image
               </label>
@@ -215,14 +222,12 @@
                   Select image
                 </button>
               </div>
-            </div> 
+            </div>  -->
 
 
-            <!-- This example requires Tailwind CSS v2.0+ -->
-            <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+           
             <button type="button" class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" role="switch" aria-checked="false">
             <span class="sr-only">Use setting</span>
-            <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
             <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
             </button>
 
