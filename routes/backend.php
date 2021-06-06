@@ -27,7 +27,7 @@ Route::get('/category/{id}/sub/category', [SubCategoryController::class, 'index'
 Route::post('/store/sub/category', [SubCategoryController::class, 'store'])->name('sub.categories.store');
 Route::get('/category/{category}/sub/category/{sub_category}/edit/form', [SubCategoryController::class, 'edit'])->name('sub.categories.edit');
 Route::put('/update/sub/category/{sub_category}', [SubCategoryController::class, 'update'])->name('sub.categories.update');
-Route::get('/delete/category/{id}', [CategoryController::class, 'destroy'])->name('categories.delete');
+Route::get('/delete/sub/category/{id}', [SubCategoryController::class, 'destroy'])->name('sub.categories.delete');
 
 
 // Brand Routes

@@ -21,12 +21,14 @@ class SubCategoryController extends Controller
         ]);
     }
 
+
     // Sub category create form
     public function create($id){
         return view('layouts.backend.admin.sub-category.add_sub_categories', [
             'category' => Category::findOrFail($id)
         ]);
     }
+
 
     // Store sub category
     public function store(Request $request) {
@@ -43,6 +45,7 @@ class SubCategoryController extends Controller
         ]);
         return redirect()->route('app.categories.index',[$category_id])->with('success','Sub Category Added');
     }
+
 
     // Sub category edit form
     public function edit(Category $category, SubCategory $sub_category){
@@ -72,16 +75,13 @@ class SubCategoryController extends Controller
     }
 
 
-    // Delete Category
+    // Delete Sub category
     public function destroy(Request $request) {
-        $category = Category::where('id', $request->id)->first();
-        if(isset($category->id)){
-            if (Storage::disk('public')->exists($category->image)){
-                Storage::disk('public')->delete($category->image);
-            }
-        }
-        $category->delete();
-        return redirect()->route('app.categories.index')->with('success','Category Deleted');
+        $sub_category = SubCategory::where('id', $request->id)->first();
+
+        $sub_category->delete();
+
+        return back()->with('success','Sub Category Deleted');
     }
    
 }

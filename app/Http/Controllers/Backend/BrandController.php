@@ -80,6 +80,7 @@ class BrandController extends Controller
         return redirect()->route('app.brands.index')->with('success','Brand Updated Successfully');
     }
 
+    // Delete Brand
     public function destroy(Request $request) {
         $brand = Brand::where('id', $request->id)->first();
         if(isset($brand->id)){
