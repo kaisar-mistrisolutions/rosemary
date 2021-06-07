@@ -7,7 +7,6 @@
             <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
     </select>
-
     
     @if (!is_null($sub_categories))
     <div class="mt-8">
