@@ -103,7 +103,9 @@
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <form action="#" method="POST">
+      <form action="{{ route('app.products.store')}}" method="POST" enctype="multipart/form-data">
+      @csrf
+      @method('POST')
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
             <div class="grid grid-cols-3 gap-6">
@@ -130,30 +132,32 @@
             </div>
 
             
-            <select id="category" name="category" autocomplete="category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+            <!-- <select id="category" name="category" autocomplete="category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                 <option value="none" selected="" disabled="" hidden="">
                   Select Category
                 </option>
                 @foreach($categories as $category)
-                <option>{{ $category->name }}</option>
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
-            </select>
+            </select> -->
+
+            @livewire('cat-sub')
             
-            <select id="sub-category" name="sub_category" autocomplete="sub-category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                <option value="none" selected="" disabled="" hidden="">
+            <!-- <select id="sub-category" name="sub_category" autocomplete="sub-category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+                <option selected="" disabled="" hidden="">
                   Select Sub Category
                 </option>
                 @foreach($sub_categories as $sub_category)
-                <option>{{ $sub_category->name}}</option>
+                <option value="{{ $sub_category->id }}">{{ $sub_category->name}}</option>
                 @endforeach
-            </select>
+            </select> -->
 
             <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                <option value="none" selected="" disabled="" hidden="">
+                <option selected="" disabled="" hidden="">
                   Select Brand
                 </option>
                 @foreach($brands as $brand)
-                <option>{{ $brand->name }}</option>
+                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                 @endforeach
             </select>
 
@@ -171,7 +175,7 @@
                   Per Unit Price
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" min="1" step="any" name="per_unit_price" id="ppp" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="number" min="1" step="any" name="per_unit_price" id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
             </div>
 
@@ -205,33 +209,26 @@
                   </p>
                 </div>
               </div>
-            </div>
 
-
-            <!-- <div>
-              <label class="block text-sm font-medium text-gray-700">
-                Multiple Image
-              </label>
-              <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 overflow-hidden bg-gray-100">
-                  <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-                <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  Select image
-                </button>
+            <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
+                
+                <input type="file" class="hidden" name="multiple_image" wire:model="photo" x-ref="photo" x-on:change="
+                                    photoName = $refs.photo.files[0].name;
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        photoPreview = e.target.result;
+                                    };
+                                    reader.readAsDataURL($refs.photo.files[0]);
+                            ">
+              
+                <div class="mt-2" x-show="photoPreview">
+                  <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
               </div>
-            </div>  -->
-
-
-           
-            <button type="button" class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" role="switch" aria-checked="false">
-            <span class="sr-only">Use setting</span>
-            <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
-            </button>
-
-
+              
+                <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
+                  Upload Multiple Image
+              </button>
+              </div>    
 
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -247,7 +244,5 @@
     </main>
   </div>
 </div>
-
-
   
 </x-app-layout>

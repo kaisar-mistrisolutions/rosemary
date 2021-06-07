@@ -40,5 +40,6 @@ Route::get('/delete/brand/{id}', [BrandController::class, 'destroy'])->name('bra
 
 
 //Product Routes
-Route::get('/add/products', [ProductController::class, 'create'])->name('products.create');
+Route::get('/add/product', [ProductController::class, 'create'])->name('products.create');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::post('/product/store',[ProductController::class, 'store'])->name('products.store');
