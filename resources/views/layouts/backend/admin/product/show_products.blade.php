@@ -152,6 +152,23 @@
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
+                            Status
+                        </dt>
+                        <dd>
+                            @if ($product->status==1)
+                            <span class="px-4 py-1 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Active
+                            </span>
+                            @else 
+                            <span class="px-4 py-1 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Inactive
+                            </span>
+                            @endif
+                        </dd>
+                    </div>
+
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
                             Sub Category Name
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">

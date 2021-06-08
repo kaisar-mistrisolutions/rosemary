@@ -18,7 +18,7 @@ class CategoryController extends Controller
     // Show all categories
     public function index(){
         return view('layouts.backend.admin.category.all_categories', [
-            'categories' => Category::paginate(2)
+            'categories' => Category::paginate(2),
         ]);
     }
 
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category){
         $request->validate([
             'name'=>'required|string',
-            'image'=>'required|image|mimes:jpg,jpeg,png,gif'
+            'image'=>'image|mimes:jpg,jpeg,png,gif'
         ]);
 
 

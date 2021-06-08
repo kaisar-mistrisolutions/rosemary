@@ -166,25 +166,6 @@
                 </div>
             </div>
 
-          
-            <!-- <div class="col-span-6 sm:col-span-3">
-              <select id="discount_type" name="discount_type" autocomplete="discount_type" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                  <option value="none" selected="" disabled="" hidden="">
-                    Choose Discount Type
-                  </option>
-                  <option>Flat</option>
-                  <option>Percentage</option>
-              </select>
-            </div>
-            <div class="col-span-6 sm:col-span-3">
-                <label for="discount" class="block text-sm font-medium text-gray-700">
-                  Discount
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" min="1" step="any" name="discount" id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
-                </div>
-            </div> -->
-
 
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
@@ -206,6 +187,11 @@
             </div>
             </div>
 
+            <div class="col-span-6 sm:col-span-3">
+              <label for="discount" class="block text-sm font-medium text-gray-700 pb-2">Status</label>
+              <span class="slider round mx-1">Active : </span>
+              <input type="checkbox" name="status" checked?value=1:value=0>
+            </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700">

@@ -139,11 +139,11 @@
                   Brand
                 </label>
               <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                  <option value="" hidden >
+                  <!-- <option value="" hidden >
                    {{ $product->brand->name }}
-                  </option>
+                  </option> -->
                     @foreach($brands as $brand)
-                      <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                      <option value="{{ $brand->id }}" @if($product->brand->id==$brand->id)selected @endif>{{ $brand->name }}</option>
                     @endforeach
               </select>
             </div>
@@ -184,6 +184,12 @@
               <label for="discount" class="block text-sm font-medium text-gray-700">Discount</label>
               <input type="number" min="1" name="discount" value="{{ $product->discount }}" id="discount" autocomplete="discount" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+              <label for="discount" class="block text-sm font-medium text-gray-700 pb-2">Status</label>
+              <span class="slider round mx-1">Active : </span> 
+              <input type="checkbox" name="status" {{ ($product->status=="1")? "checked" : "" }}>
             </div>
 
             <div>

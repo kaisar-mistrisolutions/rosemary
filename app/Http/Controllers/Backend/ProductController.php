@@ -43,6 +43,7 @@ class ProductController extends Controller
             'per_unit_price'=>'required|numeric',
             'discount_type'=>'required|string',
             'discount'=>'required|numeric',
+            'status'=>'boolean|required',
             'thumbnail_image'=>'required|image|mimes:jpg,jpeg,png,gif',
             'multiple_image'=>'required|image|mimes:jpg,jpeg,png,gif'
         ]);
@@ -68,6 +69,7 @@ class ProductController extends Controller
             'discount_type'=>$request->discount_type,
             'discount'=>$request->discount,
             'per_unit_price'=>$request->per_unit_price,
+            'status' => $request->filled('status'),
             'thumbnail_image'=>$request->file('thumbnail_image')->storeAs('product_thumbnail_image',$imageName),
             'multiple_image'=>$request->file('multiple_image')->storeAs('product_multiple_image',$multipleimageName)
         ]);
@@ -102,10 +104,9 @@ class ProductController extends Controller
             'description'=>'required',
             'quantity'=>'required|numeric',
             'per_unit_price'=>'required|numeric',
-            'discount_type'=>'required|string',
             'discount'=>'required|numeric',
-            'thumbnail_image'=>'required|image|mimes:jpg,jpeg,png,gif',
-            'multiple_image'=>'required|image|mimes:jpg,jpeg,png,gif'
+            'thumbnail_image'=>'image|mimes:jpg,jpeg,png,gif',
+            'multiple_image'=>'image|mimes:jpg,jpeg,png,gif'
          ]);
  
          $thumbnail_image=$request->file('thumbnail_image');
@@ -132,6 +133,7 @@ class ProductController extends Controller
                 'discount_type'=>$request->discount_type,
                 'discount'=>$request->discount,
                 'per_unit_price'=>$request->per_unit_price,
+                'status' => $request->filled('status'),
                 'thumbnail_image'=>$request->file('thumbnail_image')->storeAs('product_thumbnail_image',$imageName),
                 'multiple_image'=>$request->file('multiple_image')->storeAs('product_multiple_image',$multipleimageName)
              ]);
@@ -148,6 +150,7 @@ class ProductController extends Controller
                 'discount_type'=>$request->discount_type,
                 'discount'=>$request->discount,
                 'per_unit_price'=>$request->per_unit_price,
+                'status' => $request->filled('status'),
                 'thumbnail_image'=>$product->thumbnail_image,
                 'multiple_image'=>$product->multiple_image
              ]);

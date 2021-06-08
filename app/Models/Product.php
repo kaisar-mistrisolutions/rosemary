@@ -22,7 +22,8 @@ class Product extends Model
         'sub_category_id',
         'brand_id',
         'discount_type',
-        'discount'
+        'discount',
+        'status'
     ];
 
     public function subcategory()

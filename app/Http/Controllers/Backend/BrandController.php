@@ -53,7 +53,7 @@ class BrandController extends Controller
     {
         $request->validate([
             'name'=>'required|string',
-            'image'=>'required|image|mimes:jpg,jpeg,png,gif'
+            'image'=>'image|mimes:jpg,jpeg,png,gif'
         ]);
 
         $image=$request->file('image');
