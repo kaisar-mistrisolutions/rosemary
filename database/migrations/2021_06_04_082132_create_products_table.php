@@ -19,8 +19,9 @@ class CreateProductsTable extends Migration
             $table->longText('description');
             $table->integer('quantity');
             $table->integer('per_unit_price');
+            $table->string('discount_type');
             $table->string('discount');
-            $table->text('thumnail_image');
+            $table->text('thumbnail_image');
             $table->text('multiple_image');
             $table->boolean('status')->default(false);
             $table->string('slug');

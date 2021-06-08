@@ -17,12 +17,17 @@ class Product extends Model
         'quantity',
         'per_unit_price',
         'thumbnail_image',
-        'multiple_image'
+        'multiple_image',
+        'category_id',
+        'sub_category_id',
+        'brand_id',
+        'discount_type',
+        'discount'
     ];
 
     public function subcategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
     public function category()
     {

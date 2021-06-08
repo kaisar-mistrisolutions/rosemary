@@ -43,3 +43,7 @@ Route::get('/delete/brand/{id}', [BrandController::class, 'destroy'])->name('bra
 Route::get('/add/product', [ProductController::class, 'create'])->name('products.create');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/product/store',[ProductController::class, 'store'])->name('products.store');
+Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('products.show');
+Route::get('/product/{id}/update/form', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/update/product/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::get('/delete/product/{id}', [ProductController::class, 'destroy'])->name('products.delete');
