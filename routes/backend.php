@@ -6,11 +6,16 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 
 
 Route::get('/dashboard', function () {
     return view('layouts.backend.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
+// Roles and User Routes
+Route::resource('roles', RoleController::class)->except(['show']);
 
 
 // Category Routes

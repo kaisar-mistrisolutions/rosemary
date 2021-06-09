@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Permission;
+use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -12,18 +14,13 @@ class RoleSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
         
-        // Role::updateOrCreate([
-        //     'name' => 'Admin',
-        //     'slug' => 'admin',
-        //     'deletable' => false
-        //     ])
+        $admin_permissions = Permission::all();
+        Role::updateOrCreate(['name' => 'Admin', 'slug' => 'admin', 'deletable' => false])
+            ->permissions()
+            ->sync($admin_permissions->pluck('id'));
 
-        // Role::updateOrCreate([
-        //     'name' => 'User',
-        //     'slug' => 'user',
-        //     'deletable' => false
-        //     ]);
+        Role::updateOrCreate(['name' => 'User', 'slug' => 'user', 'deletable' => false]);
     }
 }
