@@ -165,8 +165,8 @@
           <!-- More items... -->
           </tbody>
           @endforeach
-          
       </table>
+      
       <div class="px-6 py-5">
       <span>{{ $brands->links() }}</span>
     </div>

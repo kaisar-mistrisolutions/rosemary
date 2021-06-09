@@ -67,18 +67,22 @@
               </form>
           </div>
 
-          <select id="category" name="category" autocomplete="category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+          <select id="category" name="category" autocomplete="category" wire:model="selectedCategory" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
               <option value="none" selected="" disabled="" hidden="">
                 Category
             </option>
-            <option>Cloth</option>
+            @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name}}</option>
+            @endforeach
           </select>
 
           <select id="sub-category" name="sub-category" autocomplete="sub-category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
               <option value="none" selected="" disabled="" hidden="">
                 Sub-Category
             </option>
-            <option>Female</option>
+            @foreach($sub_categories as $sub_category)
+            <option>{{ $sub_category->name }}</option>
+            @endforeach
           </select>
 
               <div class="mt-3 sm:mt-0 sm:ml-4 pr-4 ">
