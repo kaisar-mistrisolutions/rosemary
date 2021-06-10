@@ -145,8 +145,8 @@
                 </td>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $brand->slug}} </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ date('d-m-Y', strtotime($brand->created_at)) }}</div>
+                <td class="px-6 py-4 text-center whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ $brand->created_at->diffForHumans() }}</div>
                 </td>
                 <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
                 <a href="{{ route('app.brands.edit', $brand->id) }}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">

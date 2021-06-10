@@ -14,6 +14,7 @@ class ProductSearch extends Component
 {
     public $search;
     public $selectedCategory = null;
+    public $selectedSubCategory = null;
 
     use WithPagination;
 
@@ -33,4 +34,9 @@ class ProductSearch extends Component
             : Product::where('name','LIKE','%'.$this->search.'%')->latest()->when($this->selectedCategory,function($query){$query->where('category_id',$this->selectedCategory);})->paginate(2)
         ]);
     }
+
+    // public function updatedSelectedProduct($category_id)
+    // {
+    //     $this->selectedSubCategory = SubCategory::where('category_id', $category_id)->get();
+    // }
 }

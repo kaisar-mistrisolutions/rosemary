@@ -15,6 +15,21 @@
        @livewireStyles
        <!-- Scripts -->
        <script src="{{ asset('js/app.js') }}" defer></script>    
+       <script type="text/javascript">
+        // Listen for click on toggle checkbox
+        $('#select-all').click(function (event) {
+            if (this.checked) {
+                // Iterate each checkbox
+                $(':checkbox').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $(':checkbox').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+    </script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

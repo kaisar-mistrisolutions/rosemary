@@ -88,14 +88,34 @@
       </div>
       <div class="mt-6">
 
-      <div class="sm:col-span-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            Role Name
-          </label>
-          <div class="mt-2 w-80">
-            <input id="email" name="name" type="text" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-          </div>
-      </div>
+  <div class="row">
+    <div class="col-12">
+        <div class="main-card mb-3 card">
+          <!-- form start -->
+          <form id="roleFrom" role="form" method="POST" action="{{ isset($role) ? route('app.roles.update',$role->id)  : route('app.roles.store') }}">
+              @csrf
+              @if (isset($role))
+                  @method('PUT')
+              @endif
+            <div class="sm:col-span-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                  Role Name
+                </label>
+                <div class="mt-2 w-80">
+                  <input id="email" name="name" type="text" value="{{ $role->name ?? old('name') }}" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                </div>
+            </div>
+
+            <div class="text-center pt-6 pb-4">
+                            <strong>Manage permissions for role</strong>
+                            @error('permissions')
+                            <p class="p-2">
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                            </p>
+                            @enderror
+                        </div>
 
         <fieldset class="grid grid-cols-2 gap-4 mt-5">
           @forelse($modules->chunk(2) as $key => $chunks)
@@ -148,5 +168,5 @@
     </main>
   </div>
 </div>
-  
+
 </x-app-layout>

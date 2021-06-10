@@ -44,8 +44,23 @@
         <div class=" align-middle inline-block min-w-full sm:px-6 lg:px-8">
     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
            
+    <div class="mx-5">
+                {{-- Alert message --}}
+                @if(session()->has('success'))
+                    @include('layouts.backend.alerts.alert-success')
+                @endif
+                {{-- End alert message --}}
+
+                {{-- Errors Message --}}
+                @if ($errors->any())
+                    @include('layouts.backend.alerts.alert-danger')
+                @endif
+                {{-- End error message --}}
+              </div>
+
+
              <!-- Brand info -->
-            <div class="w-full flex items-end justify-between p-6 space-x-6">
+            <div class="w-full flex items-end justify-between pb-6 pt-2 pl-6 pr-6 space-x-6">
             <div class="flex-2 truncate">
                 <div class="flex items-center space-x-3">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -95,31 +110,76 @@
                 
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
                     @if(count($role->permissions)==0)         
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-300 text-red-800">
                             No Permission Found
                         </span>
                         @else
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-300 text-green-800">
                             {{count($role->permissions)}}
                         </span>
                     @endif
                 </td>
 
-                <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{ date('d-m-Y', strtotime($role->created_at)) }}</div>
+                <td class="px-6 py-4 text-center whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ $role->created_at->diffForHumans() }}</div>
                 </td>
-                <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
+
+
+                <!-- td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium -->
+                <td class="ml-2 px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex flex-row">
+                               
+                    <a href="{{route('app.roles.edit',$role->id)}}" class="mx-1 inline-flex items-center justify-center px-2 h-9 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                    </a>
+                    @if ($role->deletable == true)
+                    <form action="{{ route('app.roles.destroy',$role->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                        </svg>
+                      </button>
+                    </form> 
+                    @endif
+                    </td>
+
+
+                <!-- <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
                 <a href="{{ route('app.roles.edit', $role->id)}}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                     </svg>
                 </a>
-                <a href="#" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-                </td>
+
+                @if ($role->deletable == true)
+                <form action="{{ route('app.roles.destroy',$role->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                
+                <button type="submit" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                </form> 
+                @endif
+                </td> -->
+
+                <!-- @if ($role->deletable == true)
+                <form action="{{ route('app.roles.destroy',$role->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Delete</span>
+                    </button>
+                </form> 
+                @endif -->
+
             </tr>
 
           <!-- More items... -->

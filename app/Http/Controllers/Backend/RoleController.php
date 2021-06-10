@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Module;
 use App\Models\Role;
+use App\Models\Permission;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\Roles\StoreRoleRequest;
+use App\Http\Requests\Roles\UpdateRoleRequest;
+use App\Models\Module;
 
 class RoleController extends Controller
 {
@@ -44,7 +49,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Role::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ])->permissions()->sync($request->input('permissions', []));
+        
+        return redirect()->route('app.roles.index')->with('success','New Role Add Successfully');;
     }
 
     /**
@@ -64,9 +74,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $modules = Module::all();
+        return view('layouts.backend.roles.form',compact('role','modules'));
     }
 
     /**
@@ -76,9 +87,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $role->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+        $role->permissions()->sync($request->input('permissions', []));
+        //notify()->success('Role Successfully Updated.', 'Updated');
+        return redirect()->route('app.roles.index')->with('success','Role Updated Successfully');
     }
 
     /**
@@ -87,8 +104,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        if($role->deletable){
+
+            $role->delete();
+        } else {
+
+        }
+
+        return back();
     }
 }

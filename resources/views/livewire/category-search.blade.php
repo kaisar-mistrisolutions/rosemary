@@ -154,7 +154,7 @@
                                 <a class="px-4 py-2 rounded-lg" >{{ $category->subcategories->count() }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ date('d-m-Y', strtotime($category->created_at)) }}
+                            {{ $category->created_at->diffForHumans() }}
                             </td>
                             <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
                             <a href="{{ route('app.categories.edit', $category->id) }}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">

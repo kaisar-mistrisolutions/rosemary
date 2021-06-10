@@ -68,19 +68,19 @@
     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
            
             
-             <div class="mx-5">
-                {{-- Alert message --}}
-                @if(session()->has('success'))
-                    @include('layouts.backend.alerts.alert-success')
-                @endif
-                {{-- End alert message --}}
+          <div class="mx-5">
+            {{-- Alert message --}}
+            @if(session()->has('success'))
+                @include('layouts.backend.alerts.alert-success')
+            @endif
+            {{-- End alert message --}}
 
-                {{-- Errors Message --}}
-                @if ($errors->any())
-                    @include('layouts.backend.alerts.alert-danger')
-                @endif
-                {{-- End error message --}}
-              </div>
+            {{-- Errors Message --}}
+            @if ($errors->any())
+                @include('layouts.backend.alerts.alert-danger')
+            @endif
+            {{-- End error message --}}
+          </div>
 
             <!-- Sub Category info -->
         <div class="w-full flex items-end justify-between p-6 space-x-6">
@@ -144,6 +144,7 @@
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
                     <a class="px-4 py-2 rounded-lg">{{$sub_category->slug}}</a>
                 </td>
+
                 <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
                 <a href="{{ route('app.sub.categories.edit', [$category->id,$sub_category->id])}}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -156,6 +157,7 @@
                     </svg>
                 </a>
                 </td>
+                
             </tr>
 
           <!-- More items... -->
