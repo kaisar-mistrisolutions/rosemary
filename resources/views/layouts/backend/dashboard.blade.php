@@ -45,7 +45,13 @@
     
       <div class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <h1 class="text-2xl font-semibold text-gray-900">Welcome Back Admin !</h1>
+          
+            @role('admin')
+              <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
+              (Hi Admin, Welcome Back!)
+            @else 
+            <h1 class="text-2xl font-semibold text-gray-900">Wlcome to Dashboard</h1>
+            @endrole
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <!-- Replace with your content -->
@@ -58,15 +64,5 @@
     </main>
   </div>
 </div>
-
-  {{-- <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <div class="p-6 bg-white border-b border-gray-200">
-                  You're logged in!
-              </div>
-          </div>
-      </div>
-  </div> --}}
   
 </x-app-layout>

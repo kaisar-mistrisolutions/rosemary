@@ -13,6 +13,7 @@ use App\Http\Requests\Roles\StoreRoleRequest;
 use App\Http\Requests\Roles\UpdateRoleRequest;
 use App\Models\Module;
 
+
 class RoleController extends Controller
 {
     /**
@@ -22,6 +23,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.roles.index');
+
         $roles = Role::all();
         return view('layouts.backend.roles.index', [
             'roles' => $roles,
@@ -35,6 +38,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.roles.create');
+
         $modules = Module::all();
         return view('layouts.backend.roles.form', [
             'modules' => $modules,
@@ -49,6 +54,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.roles.create');
+
         Role::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -76,6 +83,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        Gate::authorize('app.roles.edit');
+
         $modules = Module::all();
         return view('layouts.backend.roles.form',compact('role','modules'));
     }
@@ -93,8 +102,7 @@ class RoleController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
         ]);
-        $role->permissions()->sync($request->input('permissions', []));
-        //notify()->success('Role Successfully Updated.', 'Updated');
+        $role->permissions()->sync($request->input('permissions'));
         return redirect()->route('app.roles.index')->with('success','Role Updated Successfully');
     }
 
@@ -106,6 +114,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        Gate::authorize('app.roles.destroy');
         if($role->deletable){
 
             $role->delete();

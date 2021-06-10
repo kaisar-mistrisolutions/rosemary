@@ -7,15 +7,19 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\DashboardController;
 
 
-Route::get('/dashboard', function () {
-    return view('layouts.backend.dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('layouts.backend.dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // Roles and User Routes
-Route::resource('roles', RoleController::class)->except(['show']);
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
 
 
 // Category Routes

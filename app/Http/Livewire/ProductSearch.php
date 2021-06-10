@@ -35,8 +35,4 @@ class ProductSearch extends Component
         ]);
     }
 
-    // public function updatedSelectedProduct($category_id)
-    // {
-    //     $this->selectedSubCategory = SubCategory::where('category_id', $category_id)->get();
-    // }
 }
