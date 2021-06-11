@@ -114,19 +114,33 @@
                   </span>
                   @enderror
               </div>
+
               <div class="col-span-3 sm:col-span-2">
                 <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">
                   Role
                 </label>
-              <select id="role" name="role" autocomplete="role" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+              <select id="role" name="role" autocomplete="role" @error('role') is-invalid @enderror class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                   <option hidden>
                     Select Role
                   </option>
                   @foreach($roles as $role)
-                  <option value="{{ $role->id }}">{{ $role->name }}</option>
+                  <option value="{{ $role->id }}" @isset($user) {{ $user->role->id == $role->id ? 'selected' : ''}} @endisset >{{ $role->name }}</option>
                   @endforeach
               </select>
             </div>
+              @error('role')
+              <span class="invalid-feedback text-red-600" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="discount" class="block text-sm font-medium text-gray-700 pb-2">Status</label>
+                <span class="slider round mx-1">Active : </span>
+                <input type="checkbox" name="status" checked?value=1:value=0 @isset($user) {{ $user->status == true ? 'checked' : ''}} @endisset>
+            </div>
+
+
             <div>
               <label for="description" class="block text-sm font-medium text-gray-700">
                 Email Address
@@ -146,7 +160,7 @@
                   Phone Number
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="tel" name="phone" id="phone"  @error('phone') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
+                  <input type="tel" name="phone" id="phone" value="{{ $user->phone ?? old('phone') }}" @error('phone') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
                 </div>
                 @error('phone')
                   <span class="invalid-feedback text-red-600" role="alert">
@@ -160,7 +174,7 @@
                   Address
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="address" id="address"  @error('address') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="Write the address here">
+                  <input type="text" name="address" id="address" value="{{ $user->address ?? old('address') }}" @error('address') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="Write the address here">
                 </div>
                 @error('address')
                 <span class="invalid-feedback text-red-600" role="alert">
@@ -170,7 +184,7 @@
             </div>
 
             <div class="col-span-3 sm:col-span-2">
-                <label for="per_unit_price" class="block text-sm font-medium text-gray-700">
+                <label for="password" class="block text-sm font-medium text-gray-700">
                   Password
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -184,11 +198,11 @@
             </div>
 
             <div class="col-span-3 sm:col-span-2">
-                <label for="per_unit_price" class="block text-sm font-medium text-gray-700">
+                <label for="confirm_password" class="block text-sm font-medium text-gray-700">
                   Confirm Password
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="password" name="confirm_password" id="confirm_password" @error('password') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="password" name="password_confirmation" id="confirm_password" @error('password') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
                 @error('password')
                   <span class="invalid-feedback text-red-600" role="alert">
@@ -197,11 +211,6 @@
                   @enderror
             </div>
 
-            <div class="col-span-6 sm:col-span-3">
-              <label for="discount" class="block text-sm font-medium text-gray-700 pb-2">Status</label>
-              <span class="slider round mx-1">Active : </span>
-              <input type="checkbox" name="status" checked?value=1:value=0>
-            </div>
 
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
                 <input type="file" class="hidden" name="image" @error('image') is-invalid @enderror x-ref="photo" x-on:change="

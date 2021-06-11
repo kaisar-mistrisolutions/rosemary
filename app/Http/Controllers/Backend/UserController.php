@@ -57,10 +57,10 @@ class UserController extends Controller
             'name'=>'required|string',
             'phone'=>'required|max:11',
             'email'=>'required|email',
-            'password'=>'required|password|max:20',
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
             'address' => 'required|string|max:255',
-            'status' => 'boolean',
-            'image' => 'required|string'
+            'image' => 'image|mimes:jpg,jpeg,png,gif'
          ]);
 
         $image=$request->file('image');
@@ -100,7 +100,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        Gate::authorize('app.users.edit');
+        $roles = Role::all();
+        return view('layouts.backend.users.form', [
+            'roles' => $roles,
+            'user' => $user,
+        ]);
     }
 
     /**
