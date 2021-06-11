@@ -112,7 +112,7 @@
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="flex items-center">
                       <div class="flex-shrink-0 h-10 w-10">
-                        <img class="h-10 w-10" src="#" alt="{{ $user->name }}">
+                        <img class="h-10 w-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
                       </div>
                     </div>
                   </td>

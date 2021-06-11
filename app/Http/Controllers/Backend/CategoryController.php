@@ -36,7 +36,8 @@ class CategoryController extends Controller
    
     // Store Category
     public function store(Request $request) {
-        Validator::make($request->all(),[
+       
+        $request->validate([
             'name'=>'required|string',
             'image'=>'required|image|mimes:jpg,jpeg,png,gif'
         ]);
@@ -56,6 +57,7 @@ class CategoryController extends Controller
 
     // Update Category
     public function update(Request $request, Category $category){
+        
         $request->validate([
             'name'=>'required|string',
             'image'=>'image|mimes:jpg,jpeg,png,gif'

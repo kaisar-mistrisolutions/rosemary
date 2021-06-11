@@ -102,8 +102,13 @@
                   Role Name
                 </label>
                 <div class="mt-2 w-80">
-                  <input id="email" name="name" type="text" value="{{ $role->name ?? old('name') }}" autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                  <input id="email" name="name" type="text" value="{{ $role->name ?? old('name') }}" @error('name') is-invalid @enderror autocomplete="email" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                 </div>
+                @error('name')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
 
             <div class="text-center pt-6 pb-4">

@@ -56,6 +56,10 @@ class RoleController extends Controller
     {
         Gate::authorize('app.roles.create');
 
+        $request->validate([
+            'name'=>'required|string',
+        ]);
+        
         Role::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),

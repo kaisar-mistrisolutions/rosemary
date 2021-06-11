@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
-    <form id="userFrom" role="form" method="POST" action="{{ isset($user) ? route('app.users.update',$user->id)  : route('app.users.store') }}">
+    <form id="userFrom" role="form" method="POST" action="{{ isset($user) ? route('app.users.update',$user->id)  : route('app.users.store') }}" enctype="multipart/form-data">
       @csrf
       @if (isset($user))
           @method('PUT')
@@ -106,14 +106,19 @@
                   User Name
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="User name">
+                  <input type="text" name="name" id="name" value="{{ $user->name ?? old('name') }}" @error('name') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="User name">
                 </div>
+                @error('name')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
               </div>
               <div class="col-span-3 sm:col-span-2">
                 <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">
                   Role
                 </label>
-              <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+              <select id="role" name="role" autocomplete="role" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
                   <option hidden>
                     Select Role
                   </option>
@@ -127,8 +132,13 @@
                 Email Address
               </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="email" name="email" id="email" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="example@email.com">
+                  <input type="email" name="email" id="email" value="{{ $user->email ?? old('email') }}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="example@email.com">
                 </div>
+                @error('email')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
             </div>
 
             <div class="col-span-3 sm:col-span-2">
@@ -136,8 +146,27 @@
                   Phone Number
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="tel" name="phone" id="phone" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
+                  <input type="tel" name="phone" id="phone"  @error('phone') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
                 </div>
+                @error('phone')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+            </div>
+
+            <div class="col-span-3 sm:col-span-2">
+                <label for="quantity" class="block text-sm font-medium text-gray-700">
+                  Address
+                </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" name="address" id="address"  @error('address') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="Write the address here">
+                </div>
+                @error('address')
+                <span class="invalid-feedback text-red-600" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
 
             <div class="col-span-3 sm:col-span-2">
@@ -145,8 +174,13 @@
                   Password
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="password" name="password" id="password" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="password" name="password" id="password" @error('password') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
+                @error('password')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
             </div>
 
             <div class="col-span-3 sm:col-span-2">
@@ -154,8 +188,13 @@
                   Confirm Password
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="password" name="confirm_password" id="confirm_password" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="password" name="confirm_password" id="confirm_password" @error('password') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
+                @error('password')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -164,10 +203,8 @@
               <input type="checkbox" name="status" checked?value=1:value=0>
             </div>
 
-
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
-                
-                <input type="file" class="hidden" name="multiple_image" wire:model="photo" x-ref="photo" x-on:change="
+                <input type="file" class="hidden" name="image" @error('image') is-invalid @enderror x-ref="photo" x-on:change="
                                     photoName = $refs.photo.files[0].name;
                                     const reader = new FileReader();
                                     reader.onload = (e) => {
@@ -178,12 +215,17 @@
               
                 <div class="mt-2" x-show="photoPreview">
                   <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
-              </div>
+                </div>
               
                 <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
                   Upload Profile Photo
               </button>
               </div>    
+              @error('image')
+                <span class="invalid-feedback text-red-600" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
 
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

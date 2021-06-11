@@ -31,7 +31,8 @@ class BrandController extends Controller
     }
    
     public function store(Request $request) {
-        Validator::make($request->all(),[
+        
+        $request->validate([
             'name'=>'required|string',
             'image'=>'required|image|mimes:jpg,jpeg,png,gif'
         ]);

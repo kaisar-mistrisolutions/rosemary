@@ -115,8 +115,13 @@
                   Product Name
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
+                  <input type="text" name="name" id="name"  @error('name') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
                 </div>
+                  @error('name')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
               </div>
 
             <div>
@@ -124,11 +129,16 @@
                 Description
               </label>
               <div class="mt-1">
-                <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
+                <textarea id="description" name="description" rows="3" @error('description') is-invalid @enderror class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
               </div>
               <p class="mt-2 text-sm text-gray-500">
                 Brief description for the product
               </p>
+              @error('description')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
             </div>
 
             <!-- cat-sub livewire component -->
@@ -153,8 +163,14 @@
                   Quantity
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" min="1" name="quantity" id="quantity" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="number" min="1" name="quantity" id="quantity" @error('quantity') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
+
+                @error('quantity')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
             </div>
 
             <div class="col-span-3 sm:col-span-2">
@@ -162,8 +178,13 @@
                   Per Unit Price
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" min="1" step="any" name="per_unit_price" id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                  <input type="number" min="1" step="any" name="per_unit_price" @error('per_unit_price') is-invalid @enderror id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
                 </div>
+                @error('per_unit_price')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
             </div>
 
 
@@ -183,8 +204,13 @@
 
             <div class="col-span-6 sm:col-span-3">
               <label for="discount" class="block text-sm font-medium text-gray-700">Discount</label>
-              <input type="number" min="1" name="discount" id="discount" autocomplete="discount" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <input type="number" min="1" name="discount" id="discount" @error('discount') is-invalid @enderror autocomplete="discount" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
+            <!-- @error('discount')
+                    <span class="invalid-feedback text-red-600" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror -->
             </div>
 
             <div class="col-span-6 sm:col-span-3">

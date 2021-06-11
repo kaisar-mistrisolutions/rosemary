@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\User;
 use App\Models\Role;
@@ -48,7 +51,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('app.users.create');
+
+        $request->validate([
+            'name'=>'required|string',
+            'phone'=>'required|max:11',
+            'email'=>'required|email',
+            'password'=>'required|password|max:20',
+            'address' => 'required|string|max:255',
+            'status' => 'boolean',
+            'image' => 'required|string'
+         ]);
+
+        $image=$request->file('image');
+
+         if (isset($image)){
+            $imgName=Str::slug($request->name).uniqid().'.'.$image->getClientOriginalExtension();
+         }
+        $user = User::create([
+            'name' => $request->name,
+            'role_id' => $request->role,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'status' => $request->filled('status'),
+            'image'=>$request->file('image')->storeAs('users',$imgName)
+        ]);
+        return redirect()->route('app.users.index')->with('success','User Created Successfully');
     }
 
     /**
@@ -94,7 +124,13 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         Gate::authorize('app.users.destroy');
+
+        if (Storage::disk('public')->exists($user->image)){
+                Storage::disk('public')->delete($user->image);
+            }
+
         $user->delete();
+
         return back()->with("success", "User Successfully Deleted");
     }
 }

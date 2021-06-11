@@ -32,7 +32,8 @@ class SubCategoryController extends Controller
 
     // Store sub category
     public function store(Request $request) {
-        Validator::make($request->all(),[
+
+        $request->validate([
             'name'=>'required|string'
         ]);
         
