@@ -212,34 +212,79 @@
             </div>
 
 
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
-                <input type="file" class="hidden" name="image" @error('image') is-invalid @enderror x-ref="photo" x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            ">
-              
-                <div class="mt-2" x-show="photoPreview">
-                  <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
+            @if(isset($user))
+              <div>
+                <label class="block text-sm font-medium text-gray-700">
+                  Photo
+                </label>
+                <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
+                  <!-- Profile Photo File Input -->
+                  <input type="file" class="hidden" name="image" wire:model="photo" x-ref="photo" x-on:change="
+                                      photoName = $refs.photo.files[0].name;
+                                      const reader = new FileReader();
+                                      reader.onload = (e) => {
+                                          photoPreview = e.target.result;
+                                      };
+                                      reader.readAsDataURL($refs.photo.files[0]);
+                              ">
+                  <!-- Current Profile Photo -->
+                  <div class="mt-2" x-show="! photoPreview" value={{ $user->image }} style="display: block;">
+                      <img class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md" src="{{Storage::url($user->image)}}" class="rounded-full h-20 w-20 object-cover">
+                  </div>
+    
+                  <!-- New Profile Photo Preview -->
+                  <div class="mt-2" x-show="photoPreview">
+                    <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
                 </div>
-              
-                <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
-                  Upload Profile Photo
-              </button>
-              </div>    
-              @error('image')
-                <span class="invalid-feedback text-red-600" role="alert">
+                <!-- New Profile Photo Preview --> 
+    
+                  <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
+                    Upload A New Photo
+                </button>
+                </div>
+              </div>
+              @else
+              <div>
+                <label class="block text-sm font-medium text-gray-700">
+                  Photo
+                </label>
+                <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
+                  <!-- Profile Photo File Input -->
+                  <input type="file" class="hidden" name="image" wire:model="photo" x-ref="photo" x-on:change="
+                                      photoName = $refs.photo.files[0].name;
+                                      const reader = new FileReader();
+                                      reader.onload = (e) => {
+                                          photoPreview = e.target.result;
+                                      };
+                                      reader.readAsDataURL($refs.photo.files[0]);
+                              "  @error('image') is-invalid @enderror>
+                  
+    
+                  <!-- New Profile Photo Preview -->
+                  <div class="mt-2" x-show="photoPreview">
+                    <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
+                </div>
+                
+                <!-- New Profile Photo Preview --> 
+                  <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
+                    Upload A New Photo
+                </button>
+                </div>
+                @error('image')
+                <span class="invalid-feedback text-red-400" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
-              @enderror
+                @enderror
+              </div>
+              @endif
 
-          </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-               Add
+            @if(isset($user))
+              Update
+            @else
+              Add
+            @endif
             </button>
           </div>
         </div>

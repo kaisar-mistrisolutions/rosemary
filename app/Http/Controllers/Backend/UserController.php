@@ -117,7 +117,40 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $image=$request->file('image');
+
+        if (isset($image)){
+            $imgName=Str::slug($request->name).uniqid().'.'.$image->getClientOriginalExtension();
+
+            if (Storage::disk('public')->exists($user->image)){
+                Storage::disk('public')->delete($user->image);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'role_id' => $request->role,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
+                'address' => $request->address,
+                'status' => $request->filled('status'),
+                'image'=>$request->file('image')->storeAs('users',$imgName)
+            ]);
+        }
+        else{
+            $user->update([
+                'name' => $request->name,
+                'role_id' => $request->role,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
+                'address' => $request->address,
+                'status' => $request->filled('status'),
+                'image'=>$user->image
+            ]);
+        }
+        
+        return redirect()->route('app.users.index')->with('success','User Updated Successfully');
     }
 
     /**
