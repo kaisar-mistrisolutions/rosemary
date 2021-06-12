@@ -146,7 +146,7 @@
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="flex items-center">
                       <div class="flex-shrink-0 h-10 w-10">
-                        <img class="h-10 w-10" src="{{ Storage::url($product->thumbnail_image) }}" alt="{{ $product->name }}">
+                        <img class="h-10 w-10 ml-8" src="{{ Storage::url($product->thumbnail_image) }}" alt="{{ $product->name }}">
                       </div>
                     </div>
                   </td>
@@ -164,11 +164,11 @@
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     @if ($product->status==1)
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
                         Active
                       </span>
                     @else 
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
                       Inactive
                     </span>
                     @endif

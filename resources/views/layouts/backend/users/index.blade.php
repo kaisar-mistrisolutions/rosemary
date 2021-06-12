@@ -109,26 +109,29 @@
                 <td class="px-2 py-2 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $key+1 }}</div>
                   </td>
-                  <td class="px-2 py-3 text-center whitespace-nowrap">
+                  <!-- <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="flex items-center">
                       <div class="flex-shrink-0 h-10 w-10">
                         <img class="h-10 w-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
                       </div>
                     </div>
-                  </td>
+                  </td> -->
+                  <td class="px-2 py-4 text-center whitespace-nowrap text-sm text-gray-500">
+                                <img class="h-10 w-10 ml-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
+                            </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $user->name }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $user->email }}</div>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
+                  <td class="px-6 py-4 text-center whitespace-nowrap">
                     @if ($user->status==1)
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
                         Active
                       </span>
                     @else 
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
                       Inactive
                     </span>
                     @endif
@@ -137,7 +140,7 @@
                     <div class="text-sm text-gray-900">{{ $user->created_at->diffForHumans() }}</div>
                   </td>
                   
-                  <td class="ml-2 px-6 py-4 text-center text-center whitespace-nowrap text-sm font-medium">
+                  <td class="px-2 py-3 text-center whitespace-nowrap">
                 <a href="{{ route('app.users.edit', $user->id) }}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

@@ -110,11 +110,11 @@
                 
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
                     @if(count($role->permissions)==0)         
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-300 text-red-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
                             No Permission Found
                         </span>
                         @else
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-300 text-green-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
                             {{count($role->permissions)}}
                         </span>
                     @endif
@@ -125,7 +125,7 @@
                 </td>
 
 
-                <td class="ml-2 px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex flex-row">
+                <td class="ml-2 px-6 py-4 ml-24 whitespace-nowrap text-center text-sm font-medium flex flex-row">
                                
                     <a href="{{route('app.roles.edit',$role->id)}}" class="mx-1 inline-flex items-center justify-center px-2 h-9 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

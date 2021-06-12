@@ -22,7 +22,6 @@
     </div>
 
     <div class="flex-shrink-0 w-14" aria-hidden="true">
-      <!-- Dummy element to force sidebar to shrink to fit close icon -->
     </div>
   </div>
 
@@ -48,10 +47,12 @@
           
             @role('admin')
               <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
-              (Hi Admin, Welcome Back!)
+              (Hi {{ Auth::user()->name }} , Welcome Back!)
             @else 
             <h1 class="text-2xl font-semibold text-gray-900">Wlcome to Dashboard</h1>
             @endrole
+
+            
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <!-- Replace with your content -->
@@ -61,7 +62,7 @@
                 <div>
 
                   <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 pl-6 pt-2 pr-6 pb-6">
-                    <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                    <div class="relative bg-white hover:bg-blue-100 pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
                           <!-- Heroicon name: outline/users -->
@@ -83,7 +84,7 @@
                       </dd>
                     </div>
 
-                    <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                    <div class="relative bg-white hover:bg-blue-100 pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
                           <!-- Heroicon name: outline/mail-open -->
@@ -105,7 +106,7 @@
                       </dd>
                     </div>
 
-                    <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                    <div class="relative bg-white hover:bg-blue-100  pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
                           <!-- Heroicon name: outline/cursor-click -->
@@ -162,7 +163,7 @@
                     <div class="text-sm text-gray-900 ">{{ $user->name }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-300 text-green-800">{{ $user->role->name }}</div>
+                    <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">{{ $user->role->name }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $user->email }}</div>
