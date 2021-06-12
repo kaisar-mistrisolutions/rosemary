@@ -98,7 +98,7 @@
         </thead>
         @foreach ($roles as $key => $role)
         <tbody>
-          <!-- Odd row -->
+      
 
             <tr class="bg-white">
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
@@ -125,7 +125,6 @@
                 </td>
 
 
-                <!-- td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium -->
                 <td class="ml-2 px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex flex-row">
                                
                     <a href="{{route('app.roles.edit',$role->id)}}" class="mx-1 inline-flex items-center justify-center px-2 h-9 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
@@ -145,44 +144,7 @@
                     </form> 
                     @endif
                     </td>
-
-
-                <!-- <td class="ml-2 px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
-                <a href="{{ route('app.roles.edit', $role->id)}}" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                    </svg>
-                </a>
-
-                @if ($role->deletable == true)
-                <form action="{{ route('app.roles.destroy',$role->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                
-                <button type="submit" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
-                  </svg>
-                </button>
-                </form> 
-                @endif
-                </td> -->
-
-                <!-- @if ($role->deletable == true)
-                <form action="{{ route('app.roles.destroy',$role->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="">
-                        <i class="fas fa-trash-alt"></i>
-                        <span>Delete</span>
-                    </button>
-                </form> 
-                @endif -->
-
             </tr>
-
-          <!-- More items... -->
           </tbody>
           @endforeach
       </table>

@@ -35,9 +35,8 @@ class ProductController extends Controller
 
      // Store Product
      public function store(Request $request) {
-        //  dd($request);
         
-        $request->validate([
+        Validator::make($request->all(),[
             'name'=>'required|string',
             'description'=>'required',
             'quantity'=>'required|numeric',

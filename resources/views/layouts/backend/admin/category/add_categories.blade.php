@@ -112,8 +112,13 @@
                         Category Name
                       </label>
                       <div class="mt-1 flex rounded-md shadow-sm">
-                        <input type="text" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="category name">
+                        <input type="text" name="name" id="name" @error('name') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="category name">
                       </div>
+                      @error('name')
+                        <span class="invalid-feedback text-red-600" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
                     </div>
                   </div>
 
@@ -129,7 +134,7 @@
                         <div class="flex text-sm text-gray-600">
                           <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                             <span>Upload an icon</span>
-                            <input id="file-upload" name="image" type="file" class="sr-only">
+                            <input id="file-upload" name="image" @error('image') is-invalid @enderror type="file" class="sr-only">
                           </label>
                           <p class="pl-1">or drag and drop</p>
                         </div>
@@ -138,6 +143,11 @@
                         </p>
                       </div>
                     </div>
+                    @error('image')
+                        <span class="invalid-feedback text-red-600" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                   </div>
 
 

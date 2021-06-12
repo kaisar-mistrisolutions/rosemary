@@ -60,7 +60,7 @@
               <!-- This example requires Tailwind CSS v2.0+ -->
                 <div>
 
-                  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 p-6">
+                  <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 pl-6 pt-2 pr-6 pb-6">
                     <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
@@ -129,7 +129,8 @@
                   </dl>
 
                   <!-- User List Details -->
-                  <div class="shadow overflow-hidden border-b p-6 border-gray-200 sm:rounded-lg">
+          <div class="shadow overflow-hidden border-b p-8 border-gray-200 sm:rounded-lg">
+          Last Logged In User
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
@@ -137,44 +138,40 @@
                     Serial
                   </th>
                   <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    User Image
+                    Name
                   </th>
                   <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    User Name
+                    Role
                   </th>
                   <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Email
                   </th>
                   <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                    Last Login At
                   </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Joined At
-                  </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Action
-                  </th>
-                  
                 </tr>
               </thead>
               
               <tbody class="bg-white divide-y divide-gray-200">
+              @foreach($users as $key=>$user)
                 <tr>
                 <td class="px-2 py-2 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">asd</div>
+                    <div class="text-sm text-gray-900">{{ $key+1 }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">sdf</div>
+                    <div class="text-sm text-gray-900 ">{{ $user->name }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">sdf</div>
+                    <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-300 text-green-800">{{ $user->role->name }}</div>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">asdf</div>
+                    <div class="text-sm text-gray-900">{{ $user->email }}</div>
                   </td>
-                  
-                  
+                  <td class="px-2 py-3 text-center whitespace-nowrap">
+                    <div class="text-sm text-gray-900">{{ $user->last_login_at  }}</div>
+                  </td>
                 </tr>
+                @endforeach
               </tbody>
              
             </table>

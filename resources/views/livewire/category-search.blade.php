@@ -151,7 +151,7 @@
                             </td>
                             </td>
                             <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
-                                <a class="px-4 py-2 rounded-lg" >{{ $category->subcategories->count() }}</a>
+                                <a class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-300 text-green-800" >{{ $category->subcategories->count() }}</a>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ $category->created_at->diffForHumans() }}

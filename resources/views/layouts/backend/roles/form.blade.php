@@ -115,9 +115,9 @@
                             <strong>Manage permissions for role</strong>
                             @error('permissions')
                             <p class="p-2">
-                        <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                              <span class="text-danger" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
                             </p>
                             @enderror
                         </div>
@@ -135,11 +135,11 @@
                                                 id="permission-{{ $permission->id }}"
                                                 value="{{ $permission->id }}"
                                                 name="permissions[]"
-                                          @if(isset($role))
-                                              @foreach($role->permissions as $rPermission)
-                                              {{ $permission->id == $rPermission->id ? 'checked' : '' }}
-                                              @endforeach
-                                          @endif
+                                                @if(isset($role))
+                                                    @foreach($role->permissions as $rPermission)
+                                                    {{ $permission->id == $rPermission->id ? 'checked' : '' }}
+                                                    @endforeach
+                                                @endif
                                           >
                                           <label class="custom-control-label"
                                                 for="permission-{{ $permission->id }}">{{ $permission->name }}</label>
