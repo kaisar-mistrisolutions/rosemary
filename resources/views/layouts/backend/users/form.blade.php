@@ -1,45 +1,7 @@
-<x-app-layout>
+@extends('layouts.backend.app')
+@section('title', 'Add User')
 
-<div class="h-screen flex overflow-hidden bg-gray-100">
-  <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
-    <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-700">
-
-      <div class="absolute top-0 right-0 -mr-12 pt-2">
-        <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-          <span class="sr-only">Close sidebar</span>
-          <!-- Heroicon name: outline/x -->
-          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="flex-shrink-0 flex items-center px-4">
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg" alt="Workflow">
-      </div>
-      
-    </div>
-
-    <div class="flex-shrink-0 w-14" aria-hidden="true">
-      <!-- Dummy element to force sidebar to shrink to fit close icon -->
-    </div>
-  </div>
-
-  @include('layouts.backend.partials.sidebar')
-
-  <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
-      <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
-        <span class="sr-only">Open sidebar</span>
-        <!-- Heroicon name: outline/menu-alt-2 -->
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-        </svg>
-      </button>
-      @include('layouts.backend.partials.header')
-    </div>
-
+@section('content')
     <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
 
     <div class="px-4 py-5 ">
@@ -229,7 +191,7 @@
                               ">
                   <!-- Current Profile Photo -->
                   <div class="mt-2" x-show="! photoPreview" value={{ $user->image }} style="display: block;">
-                      <img class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md" src="{{Storage::url($user->image)}}" class="rounded-full h-20 w-20 object-cover">
+                      <img class="max-w-sm flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md" src="{{Storage::url($user->image)}}" class="rounded-full h-20 w-20 object-cover">
                   </div>
     
                   <!-- New Profile Photo Preview -->
@@ -249,26 +211,26 @@
                   Photo
                 </label>
                 <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
-                  <!-- Profile Photo File Input -->
-                  <input type="file" class="hidden" name="image" wire:model="photo" x-ref="photo" x-on:change="
-                                      photoName = $refs.photo.files[0].name;
-                                      const reader = new FileReader();
-                                      reader.onload = (e) => {
-                                          photoPreview = e.target.result;
-                                      };
-                                      reader.readAsDataURL($refs.photo.files[0]);
-                              "  @error('image') is-invalid @enderror>
-                  
-    
-                  <!-- New Profile Photo Preview -->
-                  <div class="mt-2" x-show="photoPreview">
-                    <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
-                </div>
+                    <!-- Profile Photo File Input -->
+                    <input type="file" class="hidden" name="image" wire:model="photo" x-ref="photo" x-on:change="
+                                        photoName = $refs.photo.files[0].name;
+                                        const reader = new FileReader();
+                                        reader.onload = (e) => {
+                                            photoPreview = e.target.result;
+                                        };
+                                        reader.readAsDataURL($refs.photo.files[0]);
+                                "  @error('image') is-invalid @enderror>
+                    
+      
+                    <!-- New Profile Photo Preview -->
+                    <div class="mt-2" x-show="photoPreview">
+                      <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
+                  </div>
                 
-                <!-- New Profile Photo Preview --> 
+                  <!-- New Profile Photo Preview --> 
                   <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
                     Upload A New Photo
-                </button>
+                  </button>
                 </div>
                 @error('image')
                 <span class="invalid-feedback text-red-400" role="alert">
@@ -280,19 +242,17 @@
 
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            @if(isset($user))
-              Update
-            @else
-              Add
-            @endif
+              @if(isset($user))
+                Update
+              @else
+                Add
+              @endif
             </button>
           </div>
         </div>
       </form>
     </div>
   </div>
-
-    </main>
-  </div>
-</div>
-</x-app-layout>
+</main>
+ 
+ @endsection

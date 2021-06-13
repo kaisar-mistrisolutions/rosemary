@@ -4,9 +4,9 @@
             Category
         </label>
             <select id="category" name="category" wire:model="selectedCategory" autocomplete="category" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                    <!-- <option hidden>
+                    <option hidden>
                         Select Category
-                    </option> -->
+                    </option>
                     @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

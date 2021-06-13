@@ -18,7 +18,7 @@ class CategoryController extends Controller
     // Show all categories
     public function index(){
         return view('layouts.backend.admin.category.all_categories', [
-            'categories' => Category::paginate(2),
+            'categories' => Category::paginate(4),
         ]);
     }
 

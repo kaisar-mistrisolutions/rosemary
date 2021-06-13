@@ -1,71 +1,29 @@
-<x-app-layout>
+@extends('layouts.backend.app')
+@section('title','Dashboard')
 
-<div class="h-screen flex overflow-hidden bg-gray-100">
-  <div class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
-    <div class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-700">
+@section('content')
 
-      <div class="absolute top-0 right-0 -mr-12 pt-2">
-        <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-          <span class="sr-only">Close sidebar</span>
-          <!-- Heroicon name: outline/x -->
-          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+<main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
+  <div class="py-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        @role('admin')
+          <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
+          (Hi {{ Auth::user()->name }} , Welcome Back!)
+        @else 
+         Hi {{ Auth::user()->name }} !
+        <h1 class="text-2xl font-semibold text-gray-900">Welcome to Dashboard</h1>
+        @endrole
       </div>
 
-      <div class="flex-shrink-0 flex items-center px-4">
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg" alt="Workflow">
-      </div>
-      
-    </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
 
-    <div class="flex-shrink-0 w-14" aria-hidden="true">
-    </div>
-  </div>
-
-  @include('layouts.backend.partials.sidebar')
-
-  <div class="flex flex-col w-0 flex-1 overflow-hidden">
-    <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
-      <button type="button" class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden">
-        <span class="sr-only">Open sidebar</span>
-        <!-- Heroicon name: outline/menu-alt-2 -->
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
-        </svg>
-      </button>
-      @include('layouts.backend.partials.header')
-    </div>
-
-    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
-
-    
-      <div class="py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          
-            @role('admin')
-              <h1 class="text-2xl font-semibold text-gray-900">Admin Dashboard</h1>
-              (Hi {{ Auth::user()->name }} , Welcome Back!)
-            @else 
-            <h1 class="text-2xl font-semibold text-gray-900">Wlcome to Dashboard</h1>
-            @endrole
-
-            
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-          <!-- Replace with your content -->
+          <!-- Stats Start -->
           <div class="py-4">
-            <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
-              <!-- This example requires Tailwind CSS v2.0+ -->
-                <div>
-
+            <div class="border-4 border-dashed border-gray-200 rounded-lg h-120">
                   <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 pl-6 pt-2 pr-6 pb-6">
                     <div class="relative bg-white hover:bg-blue-100 pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
-                          <!-- Heroicon name: outline/users -->
                           <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                           </svg>
@@ -87,7 +45,6 @@
                     <div class="relative bg-white hover:bg-blue-100 pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
-                          <!-- Heroicon name: outline/mail-open -->
                           <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                           </svg>
@@ -109,7 +66,6 @@
                     <div class="relative bg-white hover:bg-blue-100  pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
                       <dt>
                         <div class="absolute bg-indigo-500 rounded-md p-3">
-                          <!-- Heroicon name: outline/cursor-click -->
                           <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                           </svg>
@@ -128,67 +84,63 @@
                       </dd>
                     </div>
                   </dl>
-
-                  <!-- User List Details -->
-          <div class="shadow overflow-hidden border-b p-8 border-gray-200 sm:rounded-lg">
-          Last Logged In User
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th scope="col" class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Serial
-                  </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Role
-                  </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Email
-                  </th>
-                  <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Last Login At
-                  </th>
-                </tr>
-              </thead>
-              
-              <tbody class="bg-white divide-y divide-gray-200">
-              @foreach($users as $key=>$user)
-                <tr>
-                <td class="px-2 py-2 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $key+1 }}</div>
-                  </td>
-                  <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900 ">{{ $user->name }}</div>
-                  </td>
-                  <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">{{ $user->role->name }}</div>
-                  </td>
-                  <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $user->email }}</div>
-                  </td>
-                  <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $user->last_login_at  }}</div>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-             
-            </table>
-          </div>
                 </div>
+                <!-- Stats End -->
 
-            </div>
+                <!-- Last Logged Section Start-->
+            <div class="shadow overflow-hidden border-b p-8 border-gray-200 sm:rounded-lg">
+                Last Logged In User
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Serial
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Name
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Role
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Email
+                    </th>
+                    <th scope="col" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Last Login At
+                    </th>
+                  </tr>
+                </thead>
+                
+                <tbody class="bg-white divide-y divide-gray-200">
+                @foreach($users as $key=>$user)
+                  <tr>
+                  <td class="px-2 py-2 text-center whitespace-nowrap">
+                      <div class="text-sm text-gray-900">{{ $key+1 }}</div>
+                    </td>
+                    <td class="px-2 py-3 text-center whitespace-nowrap">
+                      <div class="text-sm text-gray-900 ">{{ $user->name }}</div>
+                    </td>
+                    <td class="px-2 py-3 text-center whitespace-nowrap">
+                    @if($user->role->name == "Admin")
+                      <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">{{ $user->role->name }}</div>
+                    @else
+                    <div class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-white">{{ $user->role->name }}</div>
+                    @endif
+                    </td>
+                    <td class="px-2 py-3 text-center whitespace-nowrap">
+                      <div class="text-sm text-gray-900">{{ $user->email }}</div>
+                    </td>
+                    <td class="px-2 py-3 text-center whitespace-nowrap">
+                      <div class="text-sm text-gray-900">{{ $user->last_login_at  }}</div>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
           </div>
-          <!-- /End replace -->
-          
-
-
-        </div>
+          <!-- Last Logged Section End-->
       </div>
-    </main>
+    </div>
   </div>
-</div>
-  
-</x-app-layout>
+</main>
+@endsection

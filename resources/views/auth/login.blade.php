@@ -24,9 +24,9 @@
 
             <!-- Phone -->
             <!-- <div>
-                <x-label for="phone" :value="__('phone')" />
+                <x-label for="phone_number" :value="__('phone')" />
 
-                <x-input id="phone" class="block mt-1 w-full" type="number" name="phone" :value="old('phone')" required autofocus />
+                <x-input id="phone_number" class="block mt-1 w-full" type="number" name="phone_number" :value="old('phone_number')" required autofocus />
             </div> -->
 
             <!-- Password -->

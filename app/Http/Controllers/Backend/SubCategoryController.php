@@ -58,7 +58,7 @@ class SubCategoryController extends Controller
 
 
     // Update sub category
-    public function update(Request $request,  SubCategory $sub_category)
+    public function update(Request $request, Category $category, SubCategory $sub_category)
     {
         $request->validate([
             'name'=>'required|string',

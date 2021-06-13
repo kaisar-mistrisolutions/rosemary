@@ -68,8 +68,6 @@
             </nav>
 
     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-           
-            
         <div class="mx-5">
             {{-- Alert message --}}
             @if(session()->has('success'))
@@ -103,7 +101,6 @@
                 Add New Brand
             </a>
         </div>
-
       <!-- Brand info End -->
 
       <table class="min-w-full divide-y divide-gray-200">
