@@ -16,18 +16,18 @@
             @csrf
 
             <!-- Email Address -->
-            <div>
+            <!-- <div>
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
+            </div> -->
 
             <!-- Phone -->
-            <!-- <div>
+            <div>
                 <x-label for="phone_number" :value="__('phone')" />
 
                 <x-input id="phone_number" class="block mt-1 w-full" type="number" name="phone_number" :value="old('phone_number')" required autofocus />
-            </div> -->
+            </div>
 
             <!-- Password -->
             <div class="mt-4">

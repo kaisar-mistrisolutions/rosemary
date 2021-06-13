@@ -31,48 +31,47 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'phone_number' => 'required|string|max:11|unique:users',
+    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    //     ]);
+
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'phone_number' => 'required|string|max:11|unique:users',
+    //         'password' => Hash::make($request->password),
+    //     ]);
+
+    //     event(new Registered($user));
+
+    //     Auth::login($user);
+
+    //     return redirect(RouteServiceProvider::HOME);
+    // }
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone_number' => 'required|string|max:11|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
+        Auth::login($user = User::create([
+            'name' => $request->firstname,
             'email' => $request->email,
-            'phone_number' => 'required|string|max:11|unique:users',
+            'phone_number' => $request->phone_number,
             'password' => Hash::make($request->password),
-        ]);
+        ]));
 
         event(new Registered($user));
 
-        Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'firstname' => 'required|string|max:255',
-    //         'lastname' => 'required|string|max:255',
-    //         'password' => 'required|string|confirmed|min:8',
-    //         'username' => 'required|string|max:255',
-    //     ]);
-
-    //     Auth::login($user = User::create([
-    //         'firstname' => $request->firstname,
-    //         'lastname' => $request->lastname,
-    //         'username' => $request->username,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password),
-    //     ]));
-
-    //     event(new Registered($user));
-
-    //     return redirect(RouteServiceProvider::HOME);
-    // }
 }
