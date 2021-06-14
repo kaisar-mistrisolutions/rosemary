@@ -14,7 +14,8 @@ class ProductSearch extends Component
 {
     public $search;
     public $selectedCategory = null;
-    public $selectedSubCategory = null;
+    public $subCategory = null;
+    public $selectedSub = null;
 
     use WithPagination;
 
@@ -30,9 +31,18 @@ class ProductSearch extends Component
             'sub_categories' => $sub_categories,
 
             'products' =>$this->search===null? 
-            Product::latest()->when($this->selectedCategory,function($query){$query->where('category_id',$this->selectedCategory);})->paginate(2) 
+            Product::latest()->when($this->selectedCategory,function($query){$query->where('category_id',$this->selectedCategory);
+            })
+            ->when($this->selectedSub,function($query){$query->where('sub_category_id',$this->selectedSub);
+            })
+            ->paginate(2) 
             : Product::where('name','LIKE','%'.$this->search.'%')->latest()->when($this->selectedCategory,function($query){$query->where('category_id',$this->selectedCategory);})->paginate(2)
         ]);
+    }
+
+    public function updatedSelectedCategory($category_id)
+    {
+        $this->subCategory = SubCategory::where('category_id', $category_id)->get();
     }
 
 }

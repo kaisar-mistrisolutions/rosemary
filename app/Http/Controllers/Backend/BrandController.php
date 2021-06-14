@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Brand;
@@ -14,17 +15,26 @@ use App\Models\Brand;
 class BrandController extends Controller
 {
     public function index(){
+
+        Gate::authorize('app.brands.index');
+
         return view('layouts.backend.admin.brand.all_brands', [
             'brands' => Brand::paginate(2)
         ]);
     }
 
     public function create(){
+
+        Gate::authorize('app.brands.create');
+
         return view('layouts.backend.admin.brand.add_brands');
     }
 
 
     public function edit(Request $request) {
+
+        Gate::authorize('app.brands.edit');
+
         return view('layouts.backend.admin.brand.update_brands', [
             'brand' => Brand::findOrFail($request->id)
         ]);
@@ -32,6 +42,9 @@ class BrandController extends Controller
    
     public function store(Request $request) {
         
+
+        Gate::authorize('app.brands.create');
+
         $request->validate([
             'name'=>'required|string',
             'image'=>'required|image|mimes:jpg,jpeg,png,gif'
@@ -83,6 +96,9 @@ class BrandController extends Controller
 
     // Delete Brand
     public function destroy(Request $request) {
+
+        Gate::authorize('app.brands.destroy');
+
         $brand = Brand::where('id', $request->id)->first();
         if(isset($brand->id)){
             if (Storage::disk('public')->exists($brand->image)){

@@ -28,7 +28,8 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::post('/store/category', [CategoryController::class, 'store'])->name('categories.store');
 Route::get('/category/{id}/edit/form', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::put('/update/category/{category}', [CategoryController::class, 'update'])->name('categories.update');
-Route::get('/delete/category/{id}', [CategoryController::class, 'destroy'])->name('categories.delete');
+Route::delete('/delete/category/{id}', [CategoryController::class, 'destroy'])->name('categories.delete');
+
 
 // Sub-Category Routes
 Route::get('/category/{id}/create/sub/category', [SubCategoryController::class, 'create'])->name('sub.categories.create');
@@ -36,7 +37,7 @@ Route::get('/category/{id}/sub/category', [SubCategoryController::class, 'index'
 Route::post('/store/sub/category', [SubCategoryController::class, 'store'])->name('sub.categories.store');
 Route::get('/category/{category}/sub/category/{sub_category}/edit/form', [SubCategoryController::class, 'edit'])->name('sub.categories.edit');
 Route::put('/update/sub/category/{sub_category}', [SubCategoryController::class, 'update'])->name('sub.categories.update');
-Route::get('/delete/sub/category/{id}', [SubCategoryController::class, 'destroy'])->name('sub.categories.delete');
+Route::delete('/delete/sub/category/{id}', [SubCategoryController::class, 'destroy'])->name('sub.categories.delete');
 
 
 // Brand Routes
@@ -45,7 +46,7 @@ Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 Route::post('/store/brand', [BrandController::class, 'store'])->name('brands.store');
 Route::get('/brand/{id}/update/form', [BrandController::class, 'edit'])->name('brands.edit');
 Route::put('/update/brand/{brand}', [BrandController::class, 'update'])->name('brands.update');
-Route::get('/delete/brand/{id}', [BrandController::class, 'destroy'])->name('brands.delete');
+Route::delete('/delete/brand/{id}', [BrandController::class, 'destroy'])->name('brands.delete');
 
 
 //Product Routes
@@ -55,4 +56,4 @@ Route::post('/product/store',[ProductController::class, 'store'])->name('product
 Route::get('/product/{product}/show', [ProductController::class, 'show'])->name('products.show');
 Route::get('/product/{id}/update/form', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/update/product/{product}', [ProductController::class, 'update'])->name('products.update');
-Route::get('/delete/product/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+Route::delete('/delete/product/{id}', [ProductController::class, 'destroy'])->name('products.delete');

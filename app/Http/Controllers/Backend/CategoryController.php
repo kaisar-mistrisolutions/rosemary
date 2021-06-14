@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,9 @@ class CategoryController extends Controller
 
     // Show all categories
     public function index(){
+
+        Gate::authorize('app.categories.index');
+
         return view('layouts.backend.admin.category.all_categories', [
             'categories' => Category::paginate(4),
         ]);
@@ -24,11 +28,17 @@ class CategoryController extends Controller
 
     // Category create form
     public function create(){
+
+        Gate::authorize('app.categories.create');
+
         return view('layouts.backend.admin.category.add_categories');
     }
 
     // Category edit form
     public function edit(Request $request) {
+
+        Gate::authorize('app.categories.edit');
+
         return view('layouts.backend.admin.category.update_categories', [
             'category' => Category::findOrFail($request->id)
         ]);
@@ -37,6 +47,8 @@ class CategoryController extends Controller
     // Store Category
     public function store(Request $request) {
        
+        Gate::authorize('app.categories.create');
+
         $request->validate([
             'name'=>'required|string',
             'image'=>'required|image|mimes:jpg,jpeg,png,gif'
@@ -92,6 +104,9 @@ class CategoryController extends Controller
 
     // Delete Category
     public function destroy(Request $request) {
+
+        Gate::authorize('app.categories.destroy');
+
         $category = Category::where('id', $request->id)->first();
         if(isset($category->id)){
             if (Storage::disk('public')->exists($category->image)){

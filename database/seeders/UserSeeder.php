@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@mail.com',
             'password' => Hash::make('password'),
-            'phone' => '01511111111',
+            'phone_number' => '01511111111',
             'status' => true
         ]);
 
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Jone Doe',
             'email' => 'user@mail.com',
             'password' => Hash::make('password'),
-            'phone' => '01611111111',
+            'phone_number' => '01611111111',
             'status' => true
         ]);
     }

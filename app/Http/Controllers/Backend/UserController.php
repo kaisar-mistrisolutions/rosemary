@@ -89,7 +89,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('layouts.backend.users.show',[
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -101,6 +103,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         Gate::authorize('app.users.edit');
+        
         $roles = Role::all();
         return view('layouts.backend.users.form', [
             'roles' => $roles,
@@ -129,7 +132,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'role_id' => $request->role,
-                'phone' => $request->phone,
+                'phone_number' => $request->phone_number,
                 'email' => $request->email,
                 'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
                 'address' => $request->address,
@@ -141,7 +144,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'role_id' => $request->role,
-                'phone' => $request->phone,
+                'phone_number' => $request->phone_number,
                 'email' => $request->email,
                 'password' => isset($request->password) ? Hash::make($request->password) : $user->password,
                 'address' => $request->address,

@@ -28,16 +28,22 @@
                     Role: {{ Auth::user()->role->name }}
                 </div>
             </div>
-            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=GyX6XNR4mP&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            <img class="h-8 w-8 rounded-full" src="{{ Storage::url(Auth::user()->image) }}" alt="">
           </button>
           <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg">
-            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+          <div class="px-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <a class="dropdown-item block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" href="{{ route('app.users.show',Auth::user()->id) }}">
+             {{ __('Profile') }}
+            </a>
+          </div>
+            
+            <div class="px-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
               {{-- <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ url('/categories') }}">Logout</a> --}}
               <a class="dropdown-item block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
              {{ __('Logout') }}
-         </a>
+          </a>
 
          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
              @csrf

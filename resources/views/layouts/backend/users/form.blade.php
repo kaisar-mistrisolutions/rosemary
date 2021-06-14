@@ -1,5 +1,10 @@
 @extends('layouts.backend.app')
-@section('title', 'Add User')
+
+@if(isset($user))
+  @section('title', 'Update User')
+@else
+  @section('title', 'Add User')
+@endif
 
 @section('content')
     <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
@@ -122,9 +127,9 @@
                   Phone Number
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="tel" name="phone" id="phone" value="{{ $user->phone ?? old('phone') }}" @error('phone') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
+                  <input type="tel" name="phone_number" id="phone_number" value="{{ $user->phone_number ?? old('phone_number') }}" @error('phone_number') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="+880">
                 </div>
-                @error('phone')
+                @error('phone_number')
                   <span class="invalid-feedback text-red-600" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,6 +15,9 @@ class SubCategoryController extends Controller
 {
     // Show all sub categories
     public function index($id){
+
+        Gate::authorize('app.subcategories.index');
+
         $category=Category::findOrFail($id);
         return view('layouts.backend.admin.sub-category.all_sub_categories', [   
             'sub_categories' => $category->subcategories()->paginate(3),
@@ -24,6 +28,9 @@ class SubCategoryController extends Controller
 
     // Sub category create form
     public function create($id){
+
+        Gate::authorize('app.subcategories.create');
+
         return view('layouts.backend.admin.sub-category.add_sub_categories', [
             'category' => Category::findOrFail($id)
         ]);
@@ -32,6 +39,8 @@ class SubCategoryController extends Controller
 
     // Store sub category
     public function store(Request $request) {
+
+        Gate::authorize('app.subcategories.create');
 
         $request->validate([
             'name'=>'required|string'
@@ -50,6 +59,9 @@ class SubCategoryController extends Controller
 
     // Sub category edit form
     public function edit(Category $category, SubCategory $sub_category){
+
+        Gate::authorize('app.subcategories.edit');
+
         return view('layouts.backend.admin.sub-category.update_sub_categories', [
             'category' => $category,
             'sub_category' => $sub_category
@@ -78,6 +90,9 @@ class SubCategoryController extends Controller
 
     // Delete Sub category
     public function destroy(Request $request) {
+
+        Gate::authorize('app.subcategories.destroy');
+
         $sub_category = SubCategory::where('id', $request->id)->first();
 
         $sub_category->delete();

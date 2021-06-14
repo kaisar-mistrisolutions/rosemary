@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class BrandSearch extends Component
 {
     public $search;
+    public $confirming;
 
     use WithPagination;
 
@@ -20,5 +21,15 @@ class BrandSearch extends Component
         return view('livewire.brand-search', [
             'brands' => $this->search === null ? Brand::latest()->paginate(2) : Brand::where('name', 'LIKE', '%' . $this->search . '%')->latest()->paginate(2)
         ]);
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->confirming = $id;
+    }
+
+    public function kill($id)
+    {
+        Brand::destroy($id);
     }
 }

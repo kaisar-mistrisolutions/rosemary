@@ -1,5 +1,10 @@
 @extends('layouts.backend.app')
-@section('title', 'Add Role')
+
+@if(isset($role))
+  @section('title', 'Update Role')
+@else
+  @section('title', 'Add Role')
+@endif
 
 @section('content')
 

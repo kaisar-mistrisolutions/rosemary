@@ -72,29 +72,22 @@
                 <td class="px-2 py-2 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $key+1 }}</div>
                   </td>
-                  <!-- <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10">
-                        <img class="h-10 w-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
-                      </div>
-                    </div>
-                  </td> -->
                   <td class="px-2 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                                 <img class="h-10 w-10 ml-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
                             </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
-                    <div class="text-sm text-gray-900">{{ $user->name }}</div>
+                    <a class="hover:bg-green-200 px-1 py-1 rounded-lg" href="{{ route('app.users.show', $user->id) }}">{{ $user->name }}</a>
                   </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <div class="text-sm text-gray-900">{{ $user->email }}</div>
                   </td>
                   <td class="px-6 py-4 text-center whitespace-nowrap">
                     @if ($user->status==1)
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
+                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
                         Active
                       </span>
                     @else 
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-red-800">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-white">
                       Inactive
                     </span>
                     @endif

@@ -36,40 +36,50 @@ class PermissionSeeder extends Seeder
             'slug' => 'app.settings.update',
         ]);
 
-        // Profile
-        $moduleAppProfile = Module::updateOrCreate(['name' => 'Profile']);
+        // Brand
+        $moduleAppBrand = Module::updateOrCreate(['name' => 'Brand']);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppProfile->id,
-            'name' => 'Update Profile',
-            'slug' => 'app.profile.update',
+            'module_id' => $moduleAppBrand->id,
+            'name' => 'Access Brands',
+            'slug' => 'app.brands.index',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppProfile->id,
-            'name' => 'Update Password',
-            'slug' => 'app.profile.password',
+            'module_id' => $moduleAppBrand->id,
+            'name' => 'Create Brands',
+            'slug' => 'app.brands.create',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppBrand->id,
+            'name' => 'Edit Brands',
+            'slug' => 'app.brands.edit',
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleAppBrand->id,
+            'name' => 'Delete Brands',
+            'slug' => 'app.brands.destroy',
         ]);
 
-        // Backups
-        $moduleAppBackups = Module::updateOrCreate(['name' => 'Backups']);
+        // Category
+        $moduleAppCategory = Module::updateOrCreate(['name' => 'Category']);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppBackups->id,
-            'name' => 'Access Backups',
-            'slug' => 'app.backups.index',
+            'module_id' => $moduleAppCategory->id,
+            'name' => 'Access Categories',
+            'slug' => 'app.categories.index',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppBackups->id,
-            'name' => 'Create Backups',
-            'slug' => 'app.backups.create',
+            'module_id' => $moduleAppCategory->id,
+            'name' => 'Create Categories',
+            'slug' => 'app.categories.create',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppBackups->id,
-            'name' => 'Download Backups',
-            'slug' => 'app.backups.download',
+            'module_id' => $moduleAppCategory->id,
+            'name' => 'Edit Categories',
+            'slug' => 'app.categories.edit',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppBackups->id,
-            'name' => 'Delete Backups',
-            'slug' => 'app.backups.destroy',
+            'module_id' => $moduleAppCategory->id,
+            'name' => 'Delete Categories',
+            'slug' => 'app.categories.destroy',
         ]);
 
         // Role management
@@ -118,50 +128,50 @@ class PermissionSeeder extends Seeder
             'slug' => 'app.users.destroy',
         ]);
 
-        // Page management
-        $moduleAppPage = Module::updateOrCreate(['name' => 'Page Management']);
+        // Sub Category
+        $moduleAppSubCategory = Module::updateOrCreate(['name' => 'Sub Category']);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppPage->id,
-            'name' => 'Access Pages',
-            'slug' => 'app.pages.index',
+            'module_id' => $moduleAppSubCategory->id,
+            'name' => 'Access Sub Category',
+            'slug' => 'app.subcategories.index',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppPage->id,
-            'name' => 'Create Page',
-            'slug' => 'app.pages.create',
+            'module_id' => $moduleAppSubCategory->id,
+            'name' => 'Create Sub Category',
+            'slug' => 'app.subcategories.create',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppPage->id,
-            'name' => 'Edit Page',
-            'slug' => 'app.pages.edit',
+            'module_id' => $moduleAppSubCategory->id,
+            'name' => 'Edit Sub Category',
+            'slug' => 'app.subcategories.edit',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppPage->id,
-            'name' => 'Delete Page',
-            'slug' => 'app.pages.destroy',
+            'module_id' => $moduleAppSubCategory->id,
+            'name' => 'Delete Sub Category',
+            'slug' => 'app.subcategories.destroy',
         ]);
 
-        // Menu management
-        $moduleAppMenu = Module::updateOrCreate(['name' => 'Menu Management']);
+        // Product
+        $moduleAppProduct = Module::updateOrCreate(['name' => 'Product']);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppMenu->id,
-            'name' => 'Access Menus',
-            'slug' => 'app.menus.index',
+            'module_id' => $moduleAppProduct->id,
+            'name' => 'Access Product',
+            'slug' => 'app.products.index',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppMenu->id,
-            'name' => 'Create Menu',
-            'slug' => 'app.menus.create',
+            'module_id' => $moduleAppProduct->id,
+            'name' => 'Create Product',
+            'slug' => 'app.products.create',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppMenu->id,
-            'name' => 'Edit Menu',
-            'slug' => 'app.menus.edit',
+            'module_id' => $moduleAppProduct->id,
+            'name' => 'Edit Product',
+            'slug' => 'app.products.edit',
         ]);
         Permission::updateOrCreate([
-            'module_id' => $moduleAppMenu->id,
-            'name' => 'Delete Menu',
-            'slug' => 'app.menus.destroy',
+            'module_id' => $moduleAppProduct->id,
+            'name' => 'Delete Product',
+            'slug' => 'app.products.destroy',
         ]);
     }
 }

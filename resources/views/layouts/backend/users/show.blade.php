@@ -1,5 +1,6 @@
 @extends('layouts.backend.app')
-@section('title','Show Product')
+
+@section('title','User')
 
 @section('content')
 
@@ -35,7 +36,7 @@
                     <svg class="flex-shrink-0 w-6 h-full text-gray-200" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                     </svg>
-                    <a href="{{ route('app.products.index') }}" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page">All Products</a>
+                    <a href="{{ route('app.users.index') }}" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page">All Users</a>
                 </div>
                 </li>
             </ol>
@@ -56,62 +57,75 @@
 
       
      <div class="bg-white shadow px-4 pb-10 sm:rounded-lg sm:p-6">
-          <div class="md:grid md:grid-cols-3 md:gap-6 py-10">
+          <div class="md:grid md:grid-cols-3 md:gap-6 py-8">
             <div class="md:col-span-1">
-              <h3 class="text-2xl font-black leading-6 text-gray-900"> {{ $product->name }}'s Information</h3>
+              <h3 class="text-2xl font-black leading-6 text-gray-900"> {{ $user->name }}'s Information</h3>
               <p class="mt-2 text-sm text-indigo-500">
-                    Details of {{ $product->name }}
+                    Details of {{ $user->name }}
               </p>
             </div>
-
-            <!-- Product Details Start-->
             <div class="mt-5 md:mt-0 md:col-span-2">
             <div class="bg-gray-100 shadow overflow-hidden sm:rounded-lg">
             <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl class="sm:divide-y sm:divide-gray-200">
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Product Thumbnail Image
+                            User Profile Image
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <img src="{{ Storage::url($product->thumbnail_image) }}" alt="{{ $product->thumbnail_image }}" class="h-80 w-80">
+                            <img src="{{ Storage::url($user->image) }}" alt="{{ $user->userimage }}" class="h-60 w-60">
                         </dd>
                     </div>
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Product Multiple Image
+                            User Name
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            <img src="{{ Storage::url($product->multiple_image) }}" alt="{{ $product->multiple_image }}" class="h-80 w-80">
+                            {{ $user->name }}
                         </dd>
                     </div>
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Product Name
+                            User's Role
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->name }}
+                            {{ $user->role->name }}
                         </dd>
                     </div>
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Product Description
+                             Email Address
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->description }}
+                            {{ $user->email }}
                         </dd>
                     </div>
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
-                            Category Name
+                             Phone Number
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->category->name }}
+                            {{ $user->phone_number }}
                         </dd>
+                    </div>
+
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Address
+                        </dt>
+                        @if($user->address == '')
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            No Address Found
+                        </dd>
+                        @else
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{ $user->address }}
+                        </dd>
+                        @endif
                     </div>
 
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -119,82 +133,22 @@
                             Status
                         </dt>
                         <dd>
-                            @if ($product->status==1)
-                            <span class="px-4 py-1 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            @if ($user->status==1)
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-500 text-white">
                                 Active
                             </span>
                             @else 
-                            <span class="px-4 py-1 inline-flex text-s leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-500 text-white">
                                 Inactive
                             </span>
                             @endif
                         </dd>
                     </div>
 
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Sub Category Name
-                        </dt>
-                        @if(is_null($product->sub_category_id))
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            No Sub Category
-                        </dd>
-                        @else
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->subcategory->name}}
-                        </dd>
-                        @endif
-                    </div>
-
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Brand Name
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->brand->name }}
-                        </dd>
-                    </div>
-
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Quantity
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->quantity }}
-                        </dd>
-                    </div>
-
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Per Unit Price
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->per_unit_price }}
-                        </dd>
-                    </div>
-
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Discount Type
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->discount_type }}
-                        </dd>
-                    </div>
-
-                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-500">
-                            Discount
-                        </dt>
-                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {{ $product->discount }}
-                        </dd>
-                    </div>
                 </dl>
                 </div>
             </div>
        </div>
-       <!-- Product Details End-->
 </main>
 
 @endsection

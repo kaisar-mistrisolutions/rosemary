@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,6 +19,9 @@ class ProductController extends Controller
 {
     // Show all products
     public function index(){
+
+        Gate::authorize('app.products.index');
+        
         return view('layouts.backend.admin.product.all_products', [
             'products' => Product::all()
         ]);
@@ -25,6 +29,9 @@ class ProductController extends Controller
 
     // Product create form
     public function create(){
+
+        Gate::authorize('app.products.create');
+
         return view('layouts.backend.admin.product.add_products', [
             'categories'=>Category::all(),
             'sub_categories'=>SubCategory::all(),
@@ -36,6 +43,8 @@ class ProductController extends Controller
      // Store Product
      public function store(Request $request) {
         
+        Gate::authorize('app.products.create');
+
         Validator::make($request->all(),[
             'name'=>'required|string',
             'description'=>'required',
@@ -88,6 +97,9 @@ class ProductController extends Controller
 
      // Product edit form
      public function edit(Request $request, Brand $brand) {
+
+        Gate::authorize('app.products.edit');
+
         return view('layouts.backend.admin.product.update_products', [
             'product' => Product::findOrFail($request->id),
             'brands'=> Brand::get()
@@ -99,6 +111,8 @@ class ProductController extends Controller
      // Update Product
      public function update(Request $request, Product $product){
         
+        Gate::authorize('app.products.update');
+
         Validator::make($request->all(),[
             'name'=>'required|string',
             'description'=>'required',
@@ -163,6 +177,9 @@ class ProductController extends Controller
 
     // Delete Product
     public function destroy(Request $request) {
+
+        Gate::authorize('app.products.destroy');
+
         $product = Product::where('id', $request->id)->first();
 
         if(isset($product->id)){
