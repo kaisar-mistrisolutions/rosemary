@@ -16,6 +16,7 @@ class ProductSearch extends Component
     public $selectedCategory = null;
     public $subCategory = null;
     public $selectedSub = null;
+    public $confirming = null;
 
     use WithPagination;
 
@@ -43,6 +44,16 @@ class ProductSearch extends Component
     public function updatedSelectedCategory($category_id)
     {
         $this->subCategory = SubCategory::where('category_id', $category_id)->get();
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->confirming = $id;
+    }
+
+    public function kill($id)
+    {
+        Product::destroy($id);
     }
 
 }

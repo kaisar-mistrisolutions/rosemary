@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Role;
-use App\Models\Permission;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,8 +9,11 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\Roles\StoreRoleRequest;
 use App\Http\Requests\Roles\UpdateRoleRequest;
-use App\Models\Module;
+use App\Http\Resources\RoleResource;
 
+use App\Models\Module;
+use App\Models\Role;
+use App\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -29,6 +30,9 @@ class RoleController extends Controller
         return view('layouts.backend.roles.index', [
             'roles' => $roles,
         ]);
+
+        // $roles = Role::all();
+        // return RoleResource::collection($roles);
     }
 
     /**

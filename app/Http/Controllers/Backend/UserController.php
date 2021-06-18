@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -53,14 +54,14 @@ class UserController extends Controller
     {
         Gate::authorize('app.users.create');
 
-        $request->validate([
+        Validator::make($request->all(),[
             'name'=>'required|string',
-            'phone'=>'required|max:11',
+            'phone_number'=>'required|max:11',
             'email'=>'required|email',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
             'address' => 'required|string|max:255',
-            'image' => 'image|mimes:jpg,jpeg,png,gif'
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif'
          ]);
 
         $image=$request->file('image');
@@ -71,7 +72,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'role_id' => $request->role,
-            'phone' => $request->phone,
+            'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'address' => $request->address,
@@ -120,6 +121,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        Gate::authorize('app.users.edit');
+        
         $image=$request->file('image');
 
         if (isset($image)){

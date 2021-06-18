@@ -135,13 +135,13 @@
                     {{ $key + 1 }}
                 </td>
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                    <img class="h-10 w-10 rounded-full" src="{{ Storage::url($brand->image) }}" alt="{{ $brand->name }}">
+                    <img class="h-10 w-10 ml-8 rounded-full" src="{{ Storage::url($brand->image) }}" alt="{{ $brand->name }}">
                 </td>
                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm font-medium text-gray-900">
                     <a class="px-4 py-2 rounded-lg" href="#">{{ $brand->name }}</a>
                 </td>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"> {{ $brand->slug}} </td>
+                <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500"> {{ $brand->slug}} </td>
                 <td class="px-6 py-4 text-center whitespace-nowrap">
                 <div class="text-sm text-gray-900">{{ $brand->created_at->diffForHumans() }}</div>
                 </td>

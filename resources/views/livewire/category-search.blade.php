@@ -73,7 +73,7 @@
                         {{ $key + 1 }}
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                        <img class="h-10 w-10 rounded-full" src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}">
+                        <img class="h-10 w-10 ml-4 rounded-full" src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}">
                     </td>
                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                     <div class="text-sm text-gray-900">{{$category->name}}</div>
@@ -108,7 +108,7 @@
                     @if($confirming===$category->id)
                     <button wire:click="kill({{ $category->id }})"
                     class="bg-red-600 text-white hover:bg-red-700 inline-flex items-center justify-center px-2 pt-1 border border-transparent font-medium rounded-md bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
-                    <p class="h-5 w-20"> Confirm</p>
+                    <p class="h-5 w-20">Confirm</p>
                     </button>   
                     @else
                     <a href="#" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">

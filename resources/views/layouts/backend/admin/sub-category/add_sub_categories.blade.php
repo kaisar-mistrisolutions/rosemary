@@ -76,9 +76,14 @@
                       Sub Category Name
                     </label>
                     <div class="mt-1 flex rounded-md shadow-sm">
-                      <input type="text" name="name" id="sub_category" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="sub category name">
+                      <input type="text" name="name" id="sub_category" @error('name') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="sub category name">
                       <input type="hidden" name="category_id" value="{{ $category->id }}">
                     </div>
+                    @error('name')
+                      <span class="invalid-feedback text-red-600" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
                 </div>
             </div>

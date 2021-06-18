@@ -111,7 +111,7 @@ class ProductController extends Controller
      // Update Product
      public function update(Request $request, Product $product){
         
-        Gate::authorize('app.products.update');
+        Gate::authorize('app.products.edit');
 
         Validator::make($request->all(),[
             'name'=>'required|string',

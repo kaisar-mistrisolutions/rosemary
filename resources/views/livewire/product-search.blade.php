@@ -162,7 +162,20 @@
                   </svg>
               </a>
               
-            <form action="{{route('app.products.delete', $product->id)}}" method="POST" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
+              @if($confirming===$product->id)
+                <button wire:click="kill({{ $product->id }})"
+                class="bg-red-600 text-white hover:bg-red-700 inline-flex items-center justify-center px-2 pt-1 border border-transparent font-medium rounded-md bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                <p class="h-5 w-20">Confirm</p>
+                </button>   
+                @else
+                <a href="#" type="button" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" wire:click="confirmDelete({{ $product->id }})" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                @endif
+
+            <!-- <form action="{{route('app.products.delete', $product->id)}}" method="POST" class="inline-flex items-center justify-center px-2 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:text-sm">
               @method('DELETE')
               @csrf
               <button type="submit">
@@ -170,7 +183,7 @@
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
                   </svg>
               </button>               
-            </form>
+            </form> -->
             </td>
             </tr>
           </tbody>

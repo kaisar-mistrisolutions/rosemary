@@ -76,8 +76,13 @@
                   Product Name
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
+                  <input type="text" name="name" id="name" @error('name') is-invalid @enderror class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="product name">
                 </div>
+                @error('name')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
 
             <div>
@@ -85,11 +90,16 @@
                 Description
               </label>
               <div class="mt-1">
-                <textarea id="description" name="description" rows="3"class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
+                <textarea id="description" name="description" @error('description') is-invalid @enderror rows="3"class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="write here.."></textarea>
               </div>
               <p class="mt-2 text-sm text-gray-500">
                 Brief description for the product
               </p>
+              @error('description')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
 
             <!-- cat-sub livewire component -->
@@ -99,12 +109,12 @@
               <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">
                 Brand
               </label>
-              <select id="brand" name="brand" autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
-                  <option hidden>
+              <select id="brand" name="brand"  autocomplete="brand" class="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500  shadow-sm sm:max-w-lg sm:text-sm border-gray-300 rounded-md">
+                  <option hidden >
                     Select Brand
                   </option>
                   @foreach($brands as $brand)
-                  <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                  <option value="{{ $brand->id }}" >{{ $brand->name }}</option>
                   @endforeach
               </select>
             </div>
@@ -114,8 +124,13 @@
                 Quantity
               </label>
               <div class="mt-1 flex rounded-md shadow-sm">
-                <input type="number" min="1" name="quantity" id="quantity" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                <input type="number" min="1" name="quantity" id="quantity"  @error('quantity') is-invalid @enderror  class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
               </div>
+              @error('quantity')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
 
             <div class="col-span-3 sm:col-span-2">
@@ -123,8 +138,13 @@
                 Per Unit Price
               </label>
               <div class="mt-1 flex rounded-md shadow-sm">
-                <input type="number" min="1" step="any" name="per_unit_price" id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
+                <input type="number" min="1" step="any" name="per_unit_price" @error('per_unit_price') is-invalid @enderror id="per_unit_price" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-md sm:text-sm border-gray-300" placeholder="">
               </div>
+              @error('per_unit_price')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
 
           <div class="grid grid-cols-6 gap-6">
@@ -146,6 +166,12 @@
               <input type="number" min="1" name="discount" id="discount" @error('discount') is-invalid @enderror autocomplete="discount" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
           </div>
+          
+          @error('discount')
+              <span class="invalid-feedback text-red-600" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
 
             <div class="col-span-6 sm:col-span-3">
               <label for="discount" class="block text-sm font-medium text-gray-700 pb-2">Status</label>
@@ -165,7 +191,7 @@
                   <div class="flex text-sm text-gray-600">
                     <label for="thumbnail_image" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span>Upload a Thumbnail Image</span>
-                      <input id="thumbnail_image" name="thumbnail_image" type="file" class="sr-only">
+                      <input id="thumbnail_image" name="thumbnail_image" @error('thumbnail_image') is-invalid @enderror type="file" class="sr-only">
                     </label>
                     <p class="pl-1">or drag and drop</p>
                   </div>
@@ -174,6 +200,12 @@
                   </p>
                 </div>
               </div>
+              
+              @error('thumbnail_image')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
 
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-2 ">
               <input type="file" class="hidden" name="multiple_image" wire:model="photo" x-ref="photo" x-on:change="
@@ -183,7 +215,7 @@
                                       photoPreview = e.target.result;
                                   };
                                   reader.readAsDataURL($refs.photo.files[0]);
-                          ">
+                          " @error('thumbnail_image') is-invalid @enderror >
               
               <div class="mt-2" x-show="photoPreview">
                 <span class="block  w-50 h-80" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"></span>
@@ -192,7 +224,12 @@
             <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition mt-2 mr-2" x-on:click.prevent="$refs.photo.click()">
                 Upload Multiple Image
             </button>
-            </div>    
+            </div>   
+            @error('multiple_image')
+                  <span class="invalid-feedback text-red-600" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror 
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
