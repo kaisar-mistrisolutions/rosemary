@@ -30,4 +30,5 @@ class AppServiceProvider extends ServiceProvider
             return Auth::user()->role->slug == $role;
         });
     }
+    Schema::defaultStringLength(191);
 }
