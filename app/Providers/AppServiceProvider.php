@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('role', function ($role) {
             return Auth::user()->role->slug == $role;
         });
+        Schema::defaultStringLength(191);
     }
-    Schema::defaultStringLength(191);
 }
