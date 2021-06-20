@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Product;
+use Illuminate\Support\Facades\App;
 
 class DashboardController extends Controller
 {
     public function index(){
 
         Gate::authorize('app.dashboard');
-        
         $data['userCount'] = User::count();
         $data['roleCount'] = Role::count();
         $data['productCount'] = Product::count();

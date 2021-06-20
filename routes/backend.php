@@ -9,11 +9,13 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DashboardController;
-
+use App\Http\Controllers\Backend\LocalizationController;
 
 // Route::get('/dashboard', function () {
 //     return view('layouts.backend.dashboard');
 // })->middleware(['auth'])->name('dashboard');
+
+Route::get("locale/{lange}", [LocalizationController::class, 'setLang']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
