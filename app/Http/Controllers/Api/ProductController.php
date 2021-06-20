@@ -74,34 +74,34 @@ class ProductController extends Controller
     public function update(Request $request, $product)
     {
 
-        return response()->json($request->all());
+        // return response()->json($request->all());
 
-        // $product = Product::findOrFail($product);
+        $product = Product::findOrFail($product);
 
-        // $product->name = $request->name;
-        // $product->description = $request->description;
-        // $product->slug = $request->slug;
-        // $product->category_id = $request->category;
-        // $product->sub_category_id = $request->sub_category;
-        // $product->brand_id = $request->brand;
-        // $product->quantity = $request->quantity;
-        // $product->discount_type = $request->discount_type;
-        // $product->discount = $request->discount;
-        // $product->per_unit_price = $request->per_unit_price;
-        // $product->status  =  $request->status;
-        // $product->thumbnail_image = $request->thumbnail_image->store('public/ApiProduct/Thumbnail_Image');
-        // $product->multiple_image = $request->multiple_image->store('public/ApiProduct/Multiple_Image');
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->slug = $request->slug;
+        $product->category_id = $request->category;
+        $product->sub_category_id = $request->sub_category;
+        $product->brand_id = $request->brand;
+        $product->quantity = $request->quantity;
+        $product->discount_type = $request->discount_type;
+        $product->discount = $request->discount;
+        $product->per_unit_price = $request->per_unit_price;
+        $product->status  =  $request->status;
+        $product->thumbnail_image = $request->thumbnail_image->store('public/ApiProduct/Thumbnail_Image');
+        $product->multiple_image = $request->multiple_image->store('public/ApiProduct/Multiple_Image');
 
-        // $result = $product->save();
+        $result = $product->save();
 
-        // if($result)
-        // {
-        //     return ["Result" => "Product Updated Successfully"];
-        // }
-        // else
-        // {
-        //     return ["Result" => "Failed to Update Brand"];
-        // }
+        if($result)
+        {
+            return ["Result" => "Product Updated Successfully"];
+        }
+        else
+        {
+            return ["Result" => "Failed to Update Product"];
+        }
     }
 
     /**
