@@ -59,5 +59,11 @@
                 </x-button>
             </div>
         </form>
+        <div class="text-center mt-2 ">
+            <p>
+                <strong>Or Sign In with</strong>
+            </p>
+            <a href="{{ route('login.provider','github') }}" class="btn btn-outline-primary hover:text-blue-500">Github</a>
+        </div>
     </x-auth-card>
 </x-guest-layout>

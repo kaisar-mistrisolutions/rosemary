@@ -59,8 +59,11 @@
 
                 <x-button class="ml-4">
                     {{ __('Register') }}
-                </x-button>
+                </x-button>                
             </div>
+            <a class="underline text-sm text-blue-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{ __('Register with your GitHub account') }}
+                </a>
         </form>
     </x-auth-card>
 </x-guest-layout>

@@ -73,8 +73,8 @@
                     <div class="text-sm text-gray-900">{{ $key+1 }}</div>
                   </td>
                   <td class="px-2 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                                <img class="h-10 w-10 ml-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
-                            </td>
+                      <img class="h-10 w-10 ml-10" src="{{ Storage::url($user->image) }}" alt="{{ $user->name }}">
+                  </td>
                   <td class="px-2 py-3 text-center whitespace-nowrap">
                     <a class="hover:bg-green-200 px-1 py-1 rounded-lg" href="{{ route('app.users.show', $user->id) }}">{{ $user->name }}</a>
                   </td>

@@ -1,12 +1,8 @@
 <?php
 
-
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
-
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\BrandController;
-use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +24,7 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 
-// Route::get('/add', [CategoryController::class, 'index'])->name('category');
+//Socialite
+Route::get('/login/{provider}', [LoginController::class, 'redirectToProvider'])->name('login.provider');
+Route::get('/login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('login.callback');
 

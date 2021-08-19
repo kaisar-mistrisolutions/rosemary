@@ -23,7 +23,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 
-
 // Category Routes
 Route::get('/add/category', [CategoryController::class, 'create'])->name('categories.create');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');

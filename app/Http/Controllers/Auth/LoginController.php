@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
 
 class LoginController extends Controller
 {
@@ -39,8 +44,31 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // public function username()
-    // {
-    //     return 'phone_number';
-    // }
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+         // Find existing user.
+         $existingUser = User::whereEmail($user->getEmail())->first();
+         if ($existingUser)
+         {
+             Auth::login($existingUser);
+         } else {
+             // Create new user.
+             $newUser = User::create([
+                 'role_id' => Role::where('slug','user')->first()->id,
+                 'name' => $user->getName(),
+                 'email' => $user->getEmail(),
+                 'image' => $user->getAvatar(),
+                 'status' => true
+             ]); 
+             
+             Auth::login($newUser);
+         }
+         return redirect($this->redirectPath());
+    }
 }
