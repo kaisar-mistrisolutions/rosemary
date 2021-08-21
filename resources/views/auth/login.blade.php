@@ -63,7 +63,10 @@
             <p>
                 <strong>Or Sign In with</strong>
             </p>
-            <a href="{{ route('login.provider','github') }}" class="btn btn-outline-primary hover:text-blue-500">Github</a>
+            <div class="py-4">
+            <a href="{{ route('login.provider','github') }}" class="bg-transparent hover:bg-gray-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Github</a>
+            <a href="{{ route('login.provider','google') }}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Google</a>
+            </div>
         </div>
     </x-auth-card>
 </x-guest-layout>
